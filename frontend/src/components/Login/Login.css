@@ -1,0 +1,47 @@
+.firstdiv{
+    overflow-y: hidden;
+}
+.firstdiv{
+    background-image: url('https://s3-alpha-sig.figma.com/img/ad91/d71e/c9a1be5ee69511269a0b9d56909e4a11?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UrsEU2RXIZGUREfDagzIZnqe3npin7uhzdKNhUvAIBTo0mUpel5a3Q8YX12eZUkjjHFY4a7Fj-6hzOVRME2UZErvk7UI08J~NfSFieS4criEwiEuRUksjOp7d80Mrma6w3jDawNBrjEoinQh2hvOrN5osAbcYrsgAMae~85B8LZl3tgWVPuN76lOuM8LxnKAAihsQA5Fues5nVk6uU9JJfk92LEWJrxFiLlgI3uNozdiWC~MGIfpDaVTVrLB9F4RJhIRiQLQnem84h9QyugO~UDcPZO9rtikrfGGB47kF3JRInanZ9JU6gpScaRVI9wJNM9b6ZNw1-H0qdSg6NIL7A__');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:100vh;
+    width:100%
+}
+
+@media only screen and (min-width: 1200px) 
+{
+    .secondiv{
+        top: 15%;
+        right: 40%;
+    }
+}
+@media only screen and (max-width: 1100px) and (min-width: 912px) 
+{
+    .secondiv{
+        top: 30%;
+        right: 35%;
+    }
+}
+@media only screen and (max-width: 900px) and (min-width: 768px)
+{
+    .secondiv{
+        top: 20%;
+        right: 35%;
+    }
+} 
+@media only screen and (max-width: 760px) and (min-width: 400px)
+{
+    .secondiv{
+        top: 20%;
+        right: 20%;
+    }
+} 
+@media only screen and (max-width: 400px) and (min-width: 200px)
+{
+    .secondiv{
+        top: 10%;
+        right: 20%;
+    }
+} 

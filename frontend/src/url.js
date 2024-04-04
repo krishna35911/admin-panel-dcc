@@ -1,0 +1,1 @@
+export const serverurl='https://dcc-backend-qgm5.onrender.com'

@@ -1,0 +1,36 @@
+.container
+{
+    height: auto;
+    width: 100%;
+}
+.parentdiv{
+    transform: rotate(10deg);
+}
+@media only screen and (min-width: 1100px) 
+{
+    .container
+    {
+        height: auto;
+        width: 30%;
+    }
+    
+}
+@media only screen and (max-width: 1000px) and (min-width: 300px){
+    .container
+    {
+        height: auto;
+        width: 100%;
+    }
+}
+/* Addimages.css */
+
+/* Style for active button */
+.btn.active {
+    text-decoration: underline;
+  }
+  
+  /* Additional styles for buttons */
+  .btn {
+    margin: 5px; /* Adjust margin as needed */
+  }
+  
