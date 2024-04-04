@@ -12,10 +12,10 @@ function Displaymembers() {
   const navigate=useNavigate()
   const [selectedPower, setSelectedPower] = useState(null);
   const [selectedDetails, setSelectedDetails] = useState(null);
-    const [url,seturl]=useState(localStorage.getItem("commonurl"))
+    const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
     useEffect(()=>
     {
-      seturl(localStorage.getItem("commonurl"))
+      seturl(localStorage.getItem("volunteerurl"))
     },[])
     useEffect(()=>
     {
@@ -41,7 +41,7 @@ function Displaymembers() {
 
     const handlewhatsapp=async()=>
     {
-        const token=localStorage.getItem("token")
+        const token=localStorage.getItem("volunteertoken")
         const res=await axios.get(`${url}/api/admin/whatsapp`,{headers:{"x-access-token":token}})
         if(res.status===200)
         {
