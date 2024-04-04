@@ -82,7 +82,6 @@ function DisplaySlogans() {
             <tr>
               <th>#</th>
               <th>Slogan name</th>
-              <th>Image</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -90,7 +89,7 @@ function DisplaySlogans() {
            {slogan?.length>0? 
            slogan.map((item,index)=>(  <tr>
             <td>{index+1}</td>
-            <td>{item.slogan}</td>
+            <td>{item.slogan.slice(0,25)}</td>
             <td><img src={item.image} alt="" width={'100px'} style={{zIndex: '10'}}/></td>
             <td><button className='btn text-danger' type='button' onClick={(e)=>deleteslogan(e,item._id)}><i class="fa-regular fa-trash-can"></i></button></td>
           </tr>))

@@ -8,7 +8,10 @@ import Homebutton from '../Homebutton';
 function Addslogan() {
     const [data,setdata]=useState({
         slogan:"",
-        image:""
+        image:"",
+        title:"",
+        author:"",
+        event:""
     })
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const navigate=useNavigate()
@@ -49,7 +52,7 @@ function Addslogan() {
     const handlesubmit=async(e)=>
     {
         e.preventDefault()
-        if(!data.slogan || !data.image)
+        if(!data.slogan || !data.image || !data.title || !data.author || !data.event)
         {
             toast.info("Please fill the form completely")
         }
@@ -59,6 +62,9 @@ function Addslogan() {
             const formdata=new FormData()
             formdata.append("slogan",data.slogan)
             formdata.append("image",data.image)
+            formdata.append("title",data.title)
+            formdata.append("author",data.author)
+            formdata.append("event",data.event)
             try {
                 const header={
                     "Content-Type":"multipart/form-data",
@@ -70,7 +76,10 @@ function Addslogan() {
                     toast.success("Slogan added successfully")
                     setdata({
                         slogan:"",
-                        image:""
+                        image:"",
+                        title:"",
+                        author:"",
+                        event:""
                     })
                 }
                 else
@@ -105,6 +114,9 @@ function Addslogan() {
                 <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
                 </label> }
             </div> 
+            <input type="text" placeholder='Title' className='form-control mt-3' onChange={(e)=>{setdata({...data,title:e.target.value})}} />
+            <input type="text" placeholder='Author' className='form-control mt-3' onChange={(e)=>{setdata({...data,author:e.target.value})}} />
+            <input type="text" placeholder='Event' className='form-control mt-3' onChange={(e)=>{setdata({...data,event:e.target.value})}} />
                   <button className='btn mt-4 text-light ' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
                              
             </form>
