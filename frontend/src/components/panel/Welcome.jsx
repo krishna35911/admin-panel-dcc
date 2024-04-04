@@ -52,6 +52,10 @@ function Welcome() {
       alert(res.response.data);
     }
   }
+  useEffect(()=>
+  {
+    localStorage.setItem("volunteerurl","https://volunteer-backend.dmckpcc.in")
+  },[])
   return (
     <div className='container'>
       <Sidebar/>
@@ -131,7 +135,7 @@ function Welcome() {
               <div className='box-content'>
               <p className='text-end '> <i class="fa-solid fa-square-arrow-up-right"></i></p>
               <p style={{ fontSize: '13px', marginBottom: '0',fontWeight:'bold' }}>Kollam</p>
-              <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>Chakra</p>
+              <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>Charkha</p>
               </div>
             </div>
           </Col>
@@ -149,7 +153,7 @@ function Welcome() {
               <div className='box-content '>
               <p className='text-end me-2'> <i className="fa-solid fa-square-arrow-up-right"></i></p>
               <p style={{ fontSize: '13px', marginBottom: '0',fontWeight:'bold' }}>Wayanad</p>
-              <p style={{ fontSize: '10px', marginTop: '0', opacity: '0.8' }}>Chandrashekhar
+              <p style={{ fontSize: '10px', marginTop: '0', opacity: '0.8' }}>ChandraShekhar
              Azad</p>
               </div>
             </div>
