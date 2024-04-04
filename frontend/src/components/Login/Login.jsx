@@ -25,7 +25,7 @@ useEffect(() => {
     }
     else {
       axios
-        .post(`${url}/api/admin/login`, { email: email, password: password })
+        .post(`https://dcc-global-backend.plusitpark.com/api/admin/login`, { email: email, password: password })
         .then((res) => {
           console.log(res.data);
           if (res.status === 200 || res.status === 201) {

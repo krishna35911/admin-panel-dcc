@@ -13,7 +13,7 @@ function Fourth() {
     image:null,
     title:""
   })
-  const[url,seturl]=useState(localStorage.getItem("render"))
+  const[url,seturl]=useState(localStorage.getItem("commonurl"))
   const[alldistrict,setalldistrict]=useState({})
   const navigate=useNavigate()
 
@@ -28,7 +28,7 @@ function Fourth() {
   },[data.image])
   useEffect(()=>
   {
-    seturl(localStorage.getItem("render"))
+    seturl(localStorage.getItem("commonurl"))
   },[])
   console.log(url);
 

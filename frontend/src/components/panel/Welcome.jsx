@@ -42,7 +42,7 @@ function Welcome() {
     console.log(districtName);
     const token = localStorage.getItem("basetoken");
     e.preventDefault();
-    const res = await axios.get(`${url}/api/admin/get-backend-url/${districtName}`, { headers: { "x-access-token": token } });
+    const res = await axios.get(`https://dcc-global-backend.plusitpark.com/api/admin/get-backend-url/${districtName}`, { headers: { "x-access-token": token } });
     if (res.status === 200 || res.status === 201) {
       console.log(res.data);
       localStorage.setItem("token",res.data.token)
