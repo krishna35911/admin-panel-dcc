@@ -224,7 +224,7 @@ function Displayimages({ images, videos, reels, memes }) {
           <div className="col">    
           <Link to={'/partybook/memes'}>
               <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('memes')}>
-              memes
+              Trolls
               </button>
             </Link>
           </div>
@@ -236,7 +236,7 @@ function Displayimages({ images, videos, reels, memes }) {
         as="li"
         className="d-flex justify-content-between align-items-center"
       >
-        <div className="ms-2 me-auto">
+        <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.name}</div>
         </div>
         <i class="fa-solid fa-trash"  onClick={(e) => removeimage(e,item._id)} style={{color:'rgba(106, 106, 106, 1)'}} ></i>
@@ -252,7 +252,7 @@ function Displayimages({ images, videos, reels, memes }) {
         as="li"
         className="d-flex justify-content-between align-items-center"
       >
-        <div className="ms-2 me-auto">
+        <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.title}</div>
         </div>
         <button className='btn' type='button' onClick={(e) => removevideo(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}} ></i></button>
@@ -267,7 +267,7 @@ function Displayimages({ images, videos, reels, memes }) {
        as="li"
        className="d-flex justify-content-between align-items-center"
      >
-       <div className="ms-2 me-auto">
+       <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
          <div className="fw-bold">{item.name}</div>
        </div>
        <button className='btn' type='button' onClick={(e) => removereels(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
@@ -282,7 +282,7 @@ function Displayimages({ images, videos, reels, memes }) {
         as="li"
         className="d-flex justify-content-between align-items-center"
       >
-        <div className="ms-2 me-auto">
+        <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.name}</div>
         </div>
        <button className='btn' type='button' onClick={(e)=>removememes(e,item._id)}> <i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>

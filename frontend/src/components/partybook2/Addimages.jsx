@@ -296,7 +296,7 @@ function Addimages({ images, videos, reels, memes }) {
           <div className="col">
             <Link to={'/partybook2/memes'}>
               <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('memes')}>
-                Memes
+                Trolls
               </button>
             </Link>
           </div>
@@ -345,7 +345,7 @@ function Addimages({ images, videos, reels, memes }) {
         {mem&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
            {memepreview?<img src={memepreview} className='w-100' />: <label className="btn text-light " htmlFor="fileInput" style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }}>
-              Upload Memes
+              Upload Trolls
               <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setmemevalue({...memevalue,uploadedmeme:e.target.files[0]})} />
             </label>}
           </div>

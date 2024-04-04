@@ -30,6 +30,7 @@ useEffect(() => {
           console.log(res.data);
           if (res.status === 200 || res.status === 201) {
             toast.success('Login Successful')
+            localStorage.setItem("baseurl","https://dcc-global-backend.plusitpark.com");
             localStorage.setItem("basetoken", res.data.token);
             localStorage.setItem("volunteertoken", res.data.volunteerToken);
             setTimeout(() => {

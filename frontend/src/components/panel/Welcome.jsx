@@ -39,7 +39,6 @@ function Welcome() {
   },[])
 
   const district = async (e, districtName) => {
-    console.log(districtName);
     const token = localStorage.getItem("basetoken");
     e.preventDefault();
     const res = await axios.get(`https://dcc-global-backend.plusitpark.com/api/admin/get-backend-url/${districtName}`, { headers: { "x-access-token": token } });
@@ -47,6 +46,7 @@ function Welcome() {
       console.log(res.data);
       localStorage.setItem("token",res.data.token)
       localStorage.setItem("commonurl",res.data.url)
+      localStorage.setItem("districtname",res.data.district)
       navigate("/district")
     } else {
       alert(res.response.data);

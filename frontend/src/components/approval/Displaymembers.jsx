@@ -12,14 +12,14 @@ function Displaymembers() {
   const navigate=useNavigate()
   const [selectedPower, setSelectedPower] = useState(null);
   const [selectedDetails, setSelectedDetails] = useState(null);
-    const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
+    const [url,seturl]=useState(localStorage.getItem("commonurl"))
     useEffect(()=>
     {
-      seturl(localStorage.getItem("volunteerurl"))
+      seturl(localStorage.getItem("commonurl"))
     },[])
     useEffect(()=>
     {
-      const token=localStorage.getItem("volunteertoken")
+      const token=localStorage.getItem("token")
       if(!token)
       {
         navigate("/")
@@ -41,7 +41,7 @@ function Displaymembers() {
 
     const handlewhatsapp=async()=>
     {
-        const token=localStorage.getItem("volunteertoken")
+        const token=localStorage.getItem("token")
         const res=await axios.get(`${url}/api/admin/whatsapp`,{headers:{"x-access-token":token}})
         if(res.status===200)
         {

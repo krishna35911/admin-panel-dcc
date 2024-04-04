@@ -12,7 +12,11 @@ function Sidebar({ name, ...props }) {
     {
         localStorage.removeItem("basetoken")
         localStorage.removeItem("volunteertoken")
+        localStorage.removeItem("volunteerurl")
+        localStorage.removeItem("commonurl")
+        localStorage.removeItem("baseurl")
         localStorage.removeItem("token")
+        localStorage.removeItem("districtname")
         navigate('/')
     }
   return (

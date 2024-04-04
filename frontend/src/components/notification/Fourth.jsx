@@ -8,13 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
 function Fourth() {
   const[data,setdata]=useState({
-    district:'',
-    url:"",
+    loksabhaname:'',
+    assemblyname:"",
+    notificationurl:"",
     image:null,
     title:""
   })
   const[url,seturl]=useState(localStorage.getItem("commonurl"))
-  const[alldistrict,setalldistrict]=useState({})
+  const[allloksabha,setallloksabha]=useState({})
+  const[allassembly,setallassembly]=useState({})
   const navigate=useNavigate()
 
   const[preview,setpreview]=useState("")
@@ -30,7 +32,6 @@ function Fourth() {
   {
     seturl(localStorage.getItem("commonurl"))
   },[])
-  console.log(url);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,16 +56,16 @@ function Fourth() {
   
   useEffect(()=>
   {
-    districts()
+    loksabha()
   },[])
-
-  const districts=async()=>
+  const loksabha=async()=>
   {
+    const districtname=localStorage.getItem("districtname")
     try {
-      const res=await axios.get(`${url}/api/admin/districtV4?`)
+      const res=await axios.get(`${url}/api/admin/districtV4?district=${districtname}`)
       if(res.status===200)
     {
-      setalldistrict(res.data);
+      setallloksabha(res.data);
     }
     else
     {
@@ -75,30 +76,54 @@ function Fourth() {
     }
     
   }
-console.log(data);
+
+  const assembly=async()=>
+  {
+    const{loksabhaname}=data
+    const districtname=localStorage.getItem("districtname")
+    try {
+      const res=await axios.get(`${url}/api/admin/districtV4?district=${districtname}&constituency=${loksabhaname}`)
+      if(res.status===200)
+    {
+      setallassembly(res.data);
+    }
+    else
+    {
+      console.log(res.response.data);
+    }
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
 
 const handlesubmit=async(e)=>
 {
-  const{district,url,image,title}=data
+  const{loksabhaname,notificationurl,assemblyname,image,title}=data
   e.preventDefault()
     const token=localStorage.getItem("token")
+    const districtname=localStorage.getItem("districtname")
     const formdata=new FormData()
-    formdata.append("district",district)
-    formdata.append("url",url)
+    formdata.append("district",districtname)
+    formdata.append("constituency",loksabhaname)
+    formdata.append("assembly",assemblyname)
+    formdata.append("url",notificationurl)
     formdata.append("image",image)
-    formdata.append("title",title)
+    formdata.append("title",title);
+console.log(token);
     try {
-      const header={
-        "Content-Type":"multipart/form-data",
-        "x-access-token":token
-      }
-      const res=await axios.post(`${url}/api/admin/send-notification-with-district`,formdata,{header:header})
+      const res=await axios.post(`${url}/api/admin/district-notification`,formdata,{
+        headers:{
+          "x-access-token":token
+        }
+      })
       if(res.status===200)
       {
         toast.success('Notification added successfully')
         setdata({
-          district:'',
-          url:"",
+          loksabhaname:'',
+          assemblyname:"",
+          notificationurl:"",
           image:null,
           title:""
         })
@@ -113,6 +138,13 @@ const handlesubmit=async(e)=>
    
   }
 
+useEffect(()=>
+{
+  if(data.loksabhaname)
+  {
+    assembly()
+  }
+},[data.loksabhaname])
   return (
    <div className='container'>
     <Homebutton/>
@@ -123,12 +155,18 @@ const handlesubmit=async(e)=>
            </div>
            <h4 className='fw-bold mt-3 mb-3'>Notification</h4>
             <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
-            <select class="form-select" aria-label="Default select example" onChange={(e)=>{setdata({...data,district:e.target.value})}}>
-              <option selected>Select Your Regions</option>
-              {alldistrict?.length>0?alldistrict.map((item)=>(<option value={item}>{item}</option>)):<option value="no data">no data</option>}
+            <select class="form-select" aria-label="Default select example" onChange={(e)=>{setdata({...data,loksabhaname:e.target.value})}} >
+              <option selected>Select Your loksabha</option>
+              {allloksabha?.length>0?allloksabha.map((item)=>(<option value={item}>{item}</option>)):<option value="no data">no data</option>}
               </select>
+
+              {data.loksabhaname && <select class="form-select mt-3" aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
+              <option selected>Select Your assembly</option>
+              {allassembly?.length>0?allassembly.map((item)=>(<option value={item}>{item}</option>)):<option></option>}
+              </select>}
+
               <input type="text" className='form-control mt-3' placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}}/>
-              <input type="text" className='form-control mt-3' placeholder='URL' onChange={(e)=>{setdata({...data,url:e.target.value})}}/>
+              <input type="text" className='form-control mt-3' placeholder='URL' onChange={(e)=>{setdata({...data,notificationurl:e.target.value})}}/>
               <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
               {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
                 Image uploaded
