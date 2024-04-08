@@ -14,6 +14,8 @@ function Polling() {
   )
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
+
 
   useEffect(()=>
   {
@@ -118,8 +120,8 @@ function Polling() {
                 </div>))}
 
                  <div className='d-flex'>
-                    <button className='btn mt-4 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={addoption}><i class="fa-solid fa-plus me-2"></i>Add Option</button>
-                    <button className='btn mt-4 text-light ms-5' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={handlepoll}>Submit</button>
+                    <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={addoption}><i class="fa-solid fa-plus me-2"></i>Add Option</button>
+                    <button className='btn mt-4 text-light ms-5' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={handlepoll}>Submit</button>
                  </div>
                 </form>
           </div>

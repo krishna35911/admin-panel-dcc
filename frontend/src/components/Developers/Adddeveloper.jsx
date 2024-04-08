@@ -9,9 +9,10 @@ function Adddeveloper() {
     const[data,setdata]=useState({
         name:"",
         position:"",
-        image:""
+        image:null
     })
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
+    const bgcolor=localStorage.getItem("bgcolor")
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
     useEffect(()=>
@@ -39,13 +40,12 @@ function Adddeveloper() {
         })
       }
     },[])
-    useEffect(()=>
-    {
-        if(data.image)
-        {
-           setpreview(URL.createObjectURL(data.image))
-        }
-    },[data.image])
+    const handleFileChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setdata({ ...data, image: selectedImage });
+      setpreview(URL.createObjectURL(selectedImage));
+  };
+
     const handlesubmit=async(e)=>
     {
 
@@ -75,6 +75,8 @@ function Adddeveloper() {
                         image:"",
                         position:""
                     })
+                    setpreview('');
+                    document.getElementById('fileInput').value = '';
                 }
                 else
                 {
@@ -99,15 +101,17 @@ function Adddeveloper() {
         
       <input type="text" className='form-control mt-3' placeholder='Position' onChange={(e)=>{setdata({...data,position:e.target.value})}}/>
       <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
-      {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
-                Image uploaded
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
-                Upload Image
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
-                </label> }
+      {preview ? (
+           <label className='btn text-light btn-success' htmlFor='fileInput'>
+             Image uploaded
+           <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+             </label>) : (
+            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+             Upload Image
+              <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
+              </label>)}
       </div> 
-            <button className='btn mt-4 text-light ' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+            <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
 
       </form>
   

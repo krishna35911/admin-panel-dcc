@@ -13,10 +13,13 @@ function Sidebar({ name, ...props }) {
         localStorage.removeItem("basetoken")
         localStorage.removeItem("volunteertoken")
         localStorage.removeItem("volunteerurl")
+        localStorage.removeItem("districturl")
         localStorage.removeItem("commonurl")
         localStorage.removeItem("baseurl")
         localStorage.removeItem("token")
         localStorage.removeItem("districtname")
+        localStorage.removeItem("bgcolor")
+        localStorage.removeItem("subname")
         navigate('/')
     }
   return (

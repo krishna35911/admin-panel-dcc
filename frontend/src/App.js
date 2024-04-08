@@ -27,6 +27,9 @@ import Displayassign from './components/Assignments/Displayassign';
 import Addassign from './components/Assignments/Addassign';
 import Addnews from './components/News/Addnews';
 import Displaynews from './components/News/Displaynews';
+import Addarticle from './components/Articles/Addarticle';
+import Displayarticle from './components/Articles/Displayarticle';
+import Displayevent from './components/Calender/Displayevent';
 
 function App() {
   return (
@@ -65,6 +68,9 @@ function App() {
         <Route path={'/addassign'} element={<Addassign/>}></Route>
         <Route path={'/addnews'} element={<Addnews/>}></Route>
         <Route path={'/displaynews'} element={<Displaynews/>}></Route>
+        <Route path={'/addarticle'} element={<Addarticle/>}></Route>
+        <Route path={'/displayarticle'} element={<Displayarticle/>}></Route>
+        <Route path={'/displaycalender'} element={<Displayevent/>}></Route>
 
       </Routes>
     </>

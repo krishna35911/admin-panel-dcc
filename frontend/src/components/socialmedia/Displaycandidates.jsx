@@ -30,6 +30,7 @@ function Displaycandidates() {
   const handleShow = () => setShow(true);
   const[allcategory,setallcategory]=useState([])
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const navigate=useNavigate()
   useEffect(()=>
   {
@@ -209,7 +210,7 @@ function Displaycandidates() {
         <div key={index} >
           <button
             className={`btn text-light rounded-5  ${activeButton === item ? 'active' : ''}`}
-            style={{ backgroundColor: 'rgba(63, 0, 126, 1)', marginBottom: '10px' }}
+            style={{ backgroundColor: `${bgcolor}`, marginBottom: '10px' }}
             onClick={() => getcategory(item)}
           >
             {item}
@@ -274,7 +275,7 @@ function Displaycandidates() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Link to={'/socialmedia2'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
+      <Link to={'/socialmedia2'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

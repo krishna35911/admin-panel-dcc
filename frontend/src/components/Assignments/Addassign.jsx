@@ -7,16 +7,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
 
 function Addassign() {
-    const[data,setdata]=useState({
-        title:"",
-        image:"",
-        description:"",
-        districtrule:"",
-        link:"",
-        optional:"",
-        taskforce:""
-    })
+  const [data, setData] = useState({
+    title: '',
+    image: null,
+    description: '',
+    districtrule: '',
+    link: '',
+    optional: '',
+    taskforce: '',
+    date: ''
+});
     const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
+    const bgcolor=localStorage.getItem("bgcolor")
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
     useEffect(()=>
@@ -44,54 +46,53 @@ function Addassign() {
         })
       }
     },[])
-    useEffect(()=>
-    {
-        if(data.image)
-        {
-           setpreview(URL.createObjectURL(data.image))
-        }
-    },[data.image])
+    const handleFileChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setData({ ...data, image: selectedImage });
+      setpreview(URL.createObjectURL(selectedImage));
+  };
 
-    const handlesubmit=async(e)=>
+    const handleSubmit=async(e)=>
     {
-        e.preventDefault()
-            const token=localStorage.getItem("volunteertoken")
-            const formdata=new FormData()
-            formdata.append("title",data.title)
-            formdata.append("image",data.image)
-            formdata.append("date",data.date)
-            formdata.append("description",data.description)
-            formdata.append("districtrule",data.districtrule)
-            formdata.append("link",data.link)
-            formdata.append("optional",data.optional)
-            formdata.append("taskforce",data.taskforce)
-            try {
-                const header={
-                    "Content-Type":"multipart/form-data",
-                    "x-access-token":token
-                }
-                const res=await axios.post(`${url}/api/admin/assignment`,formdata,{headers:header})
-                if(res.status===200 || res.status===201)
-                {
-                    toast.success("Assignment added successfully")
-                    setdata({
-                        title:"",
-                        image:"",
-                        description:"",
-                        districtrule:"",
-                        link:"",
-                        optional:"",
-                        taskforce:""
-                    })
-                    setpreview("")
-                }
-                else
-                {
-                    toast.error("Something went wrong")
-                }
-            } catch (error) {
-                console.log(error)
-            }
+      e.preventDefault();
+      const token = localStorage.getItem('volunteertoken');
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('image', data.image);
+      formData.append('description', data.description);
+      formData.append('districtrule', data.districtrule);
+      formData.append('link', data.link);
+      formData.append('optional', data.optional);
+      formData.append('taskforce', data.taskforce);
+      formData.append('date', data.date);
+
+      try {
+          const headers = {
+              'Content-Type': 'multipart/form-data',
+              'x-access-token': token
+          };
+          const res = await axios.post(`${url}/api/admin/assignment`, formData, { headers });
+          if (res.status === 200 || res.status === 201) {
+              toast.success('Assignment added successfully');
+              setData({
+                  title: '',
+                  image: null,
+                  description: '',
+                  districtrule: '',
+                  link: '',
+                  optional: '',
+                  taskforce: '',
+                  date: ''
+              });
+              setpreview('');
+              document.getElementById('fileInput').value = '';
+          } else {
+              toast.error('Something went wrong');
+          }
+      } catch (error) {
+          console.log(error);
+          toast.error('Failed to add assignment');
+      }
         }
     
   return (
@@ -103,26 +104,83 @@ function Addassign() {
     <img src="https://s3-alpha-sig.figma.com/img/cbaa/86c1/0bd516a2c261529503cc52ead310f66c?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NGg-LUUprl6urnuCI-QCseNR941sE1CbdDaVwKKqXY7llM3KZQx-JzHAjDxxIL7Qn9rh5yGUDotXUObCCb5qSCDoWKvcrjKd76OvV1jxYHCYTr0a8rLakmeE5G29XLX4lTAovHJ5tchcxH6lt3erN-kOKyUjY6-r47JlQm0GJP0qXQHnyfCtb1c~MmBKEhCTzRlf0n5TNvg4O7nGI1VXsGtu90nIjK7-0zPqY6D0djbMutfB9NfZWQaEi0ohRxefgxgEfMxglgTG76mRP6J8A0uFypuKinEwKxfqMf-Xr2suEVNKfP65Z7AXfUolSzkT4MeREyic-GwdVpWanJq~Xw__" alt="" width={'100px'} style={{zIndex: '10'}} />
      </div>
      <h4 className='fw-bold mt-2 mb-3'>Assignment</h4>
-      <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
-        <input type="text" className='form-control mt-3' placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}} value={data.title}/>
-        <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
-        {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
-                Image uploaded
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
-                Upload Image
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
-                </label> } 
-      </div> 
-      <textarea name="" id="" cols="30" rows="6" placeholder='Description' className='form-control mt-3' onChange={(e)=>{setdata({...data,description:e.target.value})}} value={data.description}></textarea>
-      <input type='date' className='form-control mt-3' onChange={(e)=>{setdata({...data,date:e.target.value})}} value={data.date}></input>
-      <input type="text" className='form-control mt-3' placeholder='Districtrule' onChange={(e)=>{setdata({...data,districtrule:e.target.value})}} value={data.districtrule} />
-      <input type="text" className='form-control mt-3' placeholder='Taskforce' onChange={(e)=>{setdata({...data,taskforce:e.target.value})}} value={data.taskforce}/>
-      <input type="text" className='form-control mt-3' placeholder='Optional' onChange={(e)=>{setdata({...data,optional:e.target.value})}} value={data.optional}/>
-      <input type="text" className='form-control mt-3' placeholder='Link' onChange={(e)=>{setdata({...data,link:e.target.value})}} value={data.link}/>
-            <button className='btn mt-4 text-light ' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
-
-      </form>
+     <form
+                    style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }}
+                    className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'
+                >
+                    <input
+                        type='text'
+                        className='form-control mt-3'
+                        placeholder='Title'
+                        onChange={(e) => setData({ ...data, title: e.target.value })}
+                        value={data.title}
+                    />
+                    <div className='mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
+                        {preview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Image uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Image
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
+                            </label>
+                        )}
+                    </div>
+                    <textarea
+                        name=''
+                        id=''
+                        cols='30'
+                        rows='6'
+                        placeholder='Description'
+                        className='form-control mt-3'
+                        onChange={(e) => setData({ ...data, description: e.target.value })}
+                        value={data.description}
+                    ></textarea>
+                    <input
+                        type='date'
+                        className='form-control mt-3'
+                        onChange={(e) => setData({ ...data, date: e.target.value })}
+                        value={data.date}
+                    />
+                    <input
+                        type='text'
+                        className='form-control mt-3'
+                        placeholder='Districtrule'
+                        onChange={(e) => setData({ ...data, districtrule: e.target.value })}
+                        value={data.districtrule}
+                    />
+                    <input
+                        type='text'
+                        className='form-control mt-3'
+                        placeholder='Taskforce'
+                        onChange={(e) => setData({ ...data, taskforce: e.target.value })}
+                        value={data.taskforce}
+                    />
+                    <input
+                        type='text'
+                        className='form-control mt-3'
+                        placeholder='Optional'
+                        onChange={(e) => setData({ ...data, optional: e.target.value })}
+                        value={data.optional}
+                    />
+                    <input
+                        type='text'
+                        className='form-control mt-3'
+                        placeholder='Link'
+                        onChange={(e) => setData({ ...data, link: e.target.value })}
+                        value={data.link}
+                    />
+                    <button
+                        className='btn mt-4 text-light'
+                        style={{ backgroundColor: `${bgcolor}` }}
+                        type='button'
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </button>
+                </form>
   
 </div>
 <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import './Displaypoll.css'
-import ListGroup from 'react-bootstrap/ListGroup';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import './Displayarticle.css'
+import { Link, useNavigate } from 'react-router-dom'
+import { ListGroup } from 'react-bootstrap'
+import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Homebutton from '../Homebutton';
-function Displaypoll() {
-    const [poll,setpoll]=useState([])
+import Homebutton from '../Homebutton'
+
+function Displayarticle() {
+    const[article,setarticle]=useState([])
     const navigate=useNavigate()
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
@@ -36,38 +37,42 @@ function Displaypoll() {
         })
       }
     },[])
-    const getpoll=async()=>
+
+    const handlearticle=async()=>
     {
-      const token=localStorage.getItem("token")
-        const res=await axios.get(`${url}/api/admin/poll`,{headers:{"x-access-token":token}})
+        const token=localStorage.getItem("token")
+        const res=await axios.get(`${url}/api/admin/article`,{headers:{"x-access-token":token}})
         if(res.status===200)
         {
-            setpoll(res.data)
+            setarticle(res.data)
         }
         else
         {
           console.log(res.response.data);
         }
     }
-    const removepoll=async(e,id)=>
+
+    const removearticle=async(e,id)=>
     {
       const token=localStorage.getItem("token")
       e.preventDefault()
       console.log(id);
-        const res=await axios.delete(`${url}/api/admin/poll/${id}`,{headers:{"x-access-token":token}})
+        const res=await axios.delete(`${url}/api/admin/article/${id}`,{headers:{"x-access-token":token}})
         if(res.status===200)
         {
-          toast.success('Poll deleted successfully')
-          getpoll()
+          toast.success('Article removed successfully')
+            handlearticle()
+            console.log(res);
         }
         else
         {
-          toast.error('Failed to delete poll')
+          alert(res.response.data)
         }
     }
+
     useEffect(()=>
     {
-        getpoll()
+      handlearticle()
     },[])
   return (
     <div className='container'>
@@ -77,20 +82,20 @@ function Displaypoll() {
           <img src="https://s3-alpha-sig.figma.com/img/e12a/201f/1ff5d23251e9bbcb40e0dbc3a92d94b8?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=abm~dupQEsoC-zbjjRBn-SRXk3ugthXQjEWV~nX8mnPvbD3WWtt6cuEpjgS08sQ3szx62ppCkRhoJN59g7pJd7T-54uA~t2DDfecerEtKFbh2bpgm-Ue4dTtRn0tXT-z20DcJw0dCJ22KB7teON-V1Ykc57-khKfLSIov5Kerg3IXPAccZsX~S6bKYn-tCVGgPeYPrXe-7TCdqST6~m1odcOThLnDmwE670xYJHIo58DnK6QyO6ww-2jVXDd4jM7pwrL788gbyPl5OgGCiB0KpUu~pYEPIvdjJrodzmMWBxD1UbJVrCsFi9Dcy9IUlw4YjespI8QxncHEV16rz-A1w__" alt=""  style={{position: 'absolute',width: '157%',left: '-34px'}} className='parentdiv'/>
           <img src="https://s3-alpha-sig.figma.com/img/cbaa/86c1/0bd516a2c261529503cc52ead310f66c?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NGg-LUUprl6urnuCI-QCseNR941sE1CbdDaVwKKqXY7llM3KZQx-JzHAjDxxIL7Qn9rh5yGUDotXUObCCb5qSCDoWKvcrjKd76OvV1jxYHCYTr0a8rLakmeE5G29XLX4lTAovHJ5tchcxH6lt3erN-kOKyUjY6-r47JlQm0GJP0qXQHnyfCtb1c~MmBKEhCTzRlf0n5TNvg4O7nGI1VXsGtu90nIjK7-0zPqY6D0djbMutfB9NfZWQaEi0ohRxefgxgEfMxglgTG76mRP6J8A0uFypuKinEwKxfqMf-Xr2suEVNKfP65Z7AXfUolSzkT4MeREyic-GwdVpWanJq~Xw__" alt="" width={'100px'} style={{zIndex: '10'}} />
            </div>
-           <h4 className='fw-bold mt-2'>Polling</h4>
+           <h4 className='fw-bold mt-2'>All Articles</h4>
         <ListGroup as="ol" numbered className='mb-2 p-2 w-100' >
-        {poll?.length>0?
-        poll.map((item)=>(<ListGroup.Item  style={{backgroundColor:'rgba(227, 227, 227, 1)',borderBottom:'2px solid rgb(133, 129, 129, 0.553)'}}
+        {article?.length>0?
+        article.map((item)=>(<ListGroup.Item  style={{backgroundColor:'rgba(227, 227, 227, 1)',borderBottom:'2px solid rgb(133, 129, 129, 0.553)'}}
         as="li"
         className="d-flex justify-content-between align-items-center"
       >
         <div className="ms-2 me-auto">
-          <div className="fw-bold">{item.title}</div>
+          <div className="fw-bold">{item.name}</div>
         </div>
-        <button className='btn' type='button' onClick={(e) => removepoll(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
+        <button className='btn' type='button' onClick={(e) => removearticle(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
       </ListGroup.Item>)):<p>Nothing</p>}
       </ListGroup>
-     <Link to={'/polling'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Poll</button></Link>
+     <Link to={'/addarticle'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Article</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
@@ -99,4 +104,4 @@ function Displaypoll() {
   )
 }
 
-export default Displaypoll
+export default Displayarticle

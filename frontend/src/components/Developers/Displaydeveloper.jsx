@@ -10,6 +10,7 @@ function Displaydeveloper() {
     const[developer,setdeveloper]=useState([])
     const navigate=useNavigate()
       const [url,seturl]=useState(localStorage.getItem("commonurl"))
+      const bgcolor=localStorage.getItem("bgcolor")
       useEffect(()=>
       {
         seturl(localStorage.getItem("commonurl"))
@@ -97,7 +98,7 @@ function Displaydeveloper() {
     </div>
 </ListGroup.Item>)):<p>Nothing</p>}
 </ListGroup>
-<Link to={'/developer'}> <button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2"></i>Add New Developer</button></Link>
+<Link to={'/developer'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Developer</button></Link>
 
 </div>
 <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './Calender1.css'
+import './Displayevent.css'
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
@@ -7,16 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { ListGroup } from 'react-bootstrap'
+import Collapse from 'react-bootstrap/Collapse';
 
-function Calender1() {
+function Displayevent() {
     const [date, setDate] = useState(new Date());
-    const [preview,setpreview]=useState("")
-    const [selectedDate, setSelectedDate] = useState(null); 
-    const[data,setdata]=useState({
-      title:'',
-      description:"",
-      image:""
-    })
+    const [preview,setpreview]=useState([])
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [open, setOpen] = useState(false);
 
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
@@ -49,41 +47,19 @@ function Calender1() {
   },[])
 
 
-  const handleFileChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setdata({ ...data, image: selectedImage });
-    setpreview(URL.createObjectURL(selectedImage));
-};
 
     const handlesubmit=async(e)=> {
        e.preventDefault() 
-       const {title,description,image}=data
        const datestring=date.toISOString().split('T')[0] 
        console.log(datestring);
-        if(!title || !description || !datestring ||!image)
-         { 
-          toast.info('Please fill the form completely')
-         } 
-         else
-          {
              const token=localStorage.getItem("token")
-            const formdata=new FormData()
-             formdata.append("title",title)
-            formdata.append("description",description) 
-            formdata.append("image",image) 
-            formdata.append("date",datestring) 
-            const header={
-               "content-type":"multipart/form-data", 
-               "x-access-token":token } 
+           
                try { 
-                const res=await axios.post(`${url}/api/admin/calendar-event`,formdata,{headers:header}) 
+                const res=await axios.get(`${url}/api/admin/calendar-events/${datestring}`,{header:{"x-access-token":token}}) 
                 if(res.status===200 || res.status===201) 
                 {
-                  toast.success('Event added successfully');
-                  setdata({title:"",description:"",image:"",date:""})
-                  setpreview('');
-                  document.getElementById('fileInput').value = '';
-                  setSelectedDate(null); 
+                 setpreview(res.data);
+                 console.log(res.data);
                 }
                  else
                   {
@@ -92,9 +68,32 @@ function Calender1() {
                  }catch (error) 
                  { 
                   console.log(error); 
-                } } }
+                } } 
+
+  
+    const removeevent=async(e,id)=>
+    {
+      const token=localStorage.getItem("token")
+      e.preventDefault()
+      console.log(id);
+        const res=await axios.delete(`${url}/api/admin/calendar-event/${id}`,{headers:{"x-access-token":token}})
+        if(res.status===200)
+        {
+          toast.success('deleted successfully')
+          handlesubmit()
+        }
+        else
+        {
+          toast.error('Failed to delete')
+        }
+    }
+    const handleclick=async(e)=>
+    {
+        handlesubmit(e)
+        setOpen(!open)
+    }
   return (
-   <div className='container'>
+    <div className='container'>
     <Homebutton/>
       <div className=' justify-content-center align-items-center d-flex flex-column '>
       <div className='justify-content-center align-items-center d-flex ' style={{height: '100px',position: 'relative',width: '100%',overflow: 'hidden'}}>
@@ -118,24 +117,28 @@ function Calender1() {
                     }
                 />
                 </div>
-                <input type="text" placeholder='Title' className='form-control mt-3' style={{backgroundColor:'rgba(227, 227, 227, 1)'}} value={data.title} onChange={(e)=>setdata({...data,title:e.target.value})}/>
+                <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={(e)=>handleclick(e)}>View Event</button>
 
-                <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'rgba(227, 227, 227, 1)'}}>
-                {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
-                                Image uploaded
-                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
-                            </label>
-                        ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
-                                Upload Image
-                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
-                            </label>
-                        )}
-              </div>
-
-                  <textarea cols="10" rows="4" placeholder='Description' className='form-control mt-3' style={{backgroundColor:'rgba(227, 227, 227, 1)'}} value={data.description} onChange={(e)=>setdata({...data,description:e.target.value})}></textarea>
-                  <button className='btn w-50 text-light mt-3' style={{backgroundColor:`${bgcolor}`}}onClick={(e)=>handlesubmit(e)}>Create Event</button>
+                <Collapse in={open}>
+        <div id="example-collapse-text">
+        <ListGroup className='w-100' >
+  {preview?.length>0?
+  preview.map((item,index)=>(<ListGroup.Item  style={{backgroundColor:'rgba(227, 227, 227, 1)',borderBottom:'2px solid rgb(133, 129, 129, 0.553)'}}
+  as="li"
+>
+    <div className='d-flex justify-content-start gap-5 align-items-center'>
+      <p>{index+1}</p>
+      <div >
+        <p className="fw-bold ">{item.title}</p>
+        <p className="fw-bold ">{item.date}</p>
+      </div>
+  
+    <button className='btn ms-auto' type='button' onClick={(e) => removeevent(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
+    </div>
+</ListGroup.Item>)):<p>Nothing</p>}
+</ListGroup>
+        </div>
+      </Collapse>
           </div>
           <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
 
@@ -143,4 +146,4 @@ function Calender1() {
   )
 }
 
-export default Calender1
+export default Displayevent

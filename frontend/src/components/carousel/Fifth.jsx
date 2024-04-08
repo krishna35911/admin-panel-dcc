@@ -16,6 +16,7 @@ function Fifth() {
   const[img,setimg]=useState()
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const [open, setOpen] = useState(false);
   const[allcarousel,setallcarousel]=useState([])
   useEffect(()=>
@@ -44,13 +45,11 @@ function Fifth() {
     }
   },[])
 
-  useEffect(()=>
-  {
-    if(carousel.image)
-    {
-      setimg(URL.createObjectURL(carousel.image))
-    }
-  },[carousel.image])
+  const handleFileChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setcarousel({ ...carousel, image: selectedImage });
+    setimg(URL.createObjectURL(selectedImage));
+};
   const handlesubmit=async(e)=>
   {
     e.preventDefault()
@@ -77,8 +76,10 @@ function Fifth() {
             toast.success('Carousel added successfully')
             setcarousel({
             href:"",
-            name:""})
-            setimg("")
+            name:"",
+            image:""})
+            setimg('');
+            document.getElementById('fileInput').value = '';
         }
         else
         {
@@ -133,20 +134,24 @@ function Fifth() {
            <h3 className='fw-bold mt-2 mb-3'>Carousels</h3>
             <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
             <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
-            {img?<label className="btn text-light btn-success " htmlFor="fileInput">
-                Image uploaded
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
-                Upload Image
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setcarousel({...carousel,image:e.target.files[0]})}/>
-                </label> }
+            {img ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Image uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Image
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
+                            </label>
+                        )}
             </div>
               <input type="text" className='form-control mt-3' placeholder='URL' value={carousel.href} onChange={(e)=>setcarousel({...carousel,href:e.target.value})}/>
               <input type="text" className='form-control mt-3' placeholder='Name' value={carousel.name} onChange={(e)=>setcarousel({...carousel,name:e.target.value})}/>
               <div className='d-flex'>
-                <button className='btn mt-4 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='buttom' onClick={(e)=>handlesubmit(e)}>Submit</button>
+                <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='buttom' onClick={(e)=>handlesubmit(e)}>Submit</button>
                 <button className='btn  text-light mt-4'  type='button' onClick={handleButtonClick}
-                aria-controls="example-collapse-text"  style={{backgroundColor:'rgba(63, 0, 126, 1)'}}
+                aria-controls="example-collapse-text"  style={{backgroundColor:`${bgcolor}`}}
                 aria-expanded={open}>
                   View all carousels
                 </button>

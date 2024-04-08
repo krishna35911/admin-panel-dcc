@@ -12,6 +12,8 @@ function AddAd() {
         name:""
     })
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
+    const bgcolor=localStorage.getItem("bgcolor")
+
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
     useEffect(()=>
@@ -100,13 +102,13 @@ function AddAd() {
         {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
                 Image uploaded
                 <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
+                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:`${bgcolor}`}}>
                 Upload Image
                 <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
                 </label> }
       </div> 
       <input type="text" className='form-control mt-3' placeholder='URL' onChange={(e)=>{setdata({...data,href:e.target.value})}}/>
-            <button className='btn mt-4 text-light ' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+            <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
 
       </form>
   

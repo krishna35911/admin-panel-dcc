@@ -34,6 +34,7 @@ function Addimages({ images, videos, reels, memes }) {
     memedescription:""
   }) 
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const navigate=useNavigate()
 
   useEffect(()=>
@@ -69,25 +70,48 @@ function Addimages({ images, videos, reels, memes }) {
   const rl=reels?true:false
   const mem=memes?true:false
 
-  useEffect(()=>
-  {
-    if(imagevalue.uploadedimg)
-    {
-      setpreview(URL.createObjectURL(imagevalue.uploadedimg))
-    }
-    if(videovalue.uploadedvideo)
-    {
-      setvideopreview(URL.createObjectURL(videovalue.uploadedvideo))
-    }
-    if(reelsvalue.uploadedreels)
-    {
-      setreelspreview(URL.createObjectURL(reelsvalue.uploadedreels))
-    }
-    if(memevalue.uploadedmeme)
-    {
-      setmemepreview(URL.createObjectURL(memevalue.uploadedmeme))
-    }
-  },[imagevalue.uploadedimg,videovalue.uploadedvideo,reelsvalue.uploadedreels,memevalue.uploadedmeme])
+  const handleimageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setimagevalue({ ...imagevalue, uploadedimg: selectedImage });
+    setpreview(URL.createObjectURL(selectedImage));
+};
+const handlevideoChange = (e) => {
+  const selectedvideo = e.target.files[0];
+  setvideovalue({ ...videovalue, uploadedvideo: selectedvideo });
+  setvideopreview(URL.createObjectURL(selectedvideo));
+};
+
+const handlereelschange = (e) => {
+  const selectedreel = e.target.files[0];
+  setreelsvalue({ ...reelsvalue, uploadedreels: selectedreel });
+  setreelspreview(URL.createObjectURL(selectedreel));
+};
+
+const handlememechange = (e) => {
+  const selectedmeme = e.target.files[0];
+  setmemevalue({ ...memevalue, uploadedmeme: selectedmeme });
+  setmemepreview(URL.createObjectURL(selectedmeme));
+};
+
+  // useEffect(()=>
+  // {
+  //   if(imagevalue.uploadedimg)
+  //   {
+  //     setpreview(URL.createObjectURL(imagevalue.uploadedimg))
+  //   }
+  //   if(videovalue.uploadedvideo)
+  //   {
+  //     setvideopreview(URL.createObjectURL(videovalue.uploadedvideo))
+  //   }
+  //   if(reelsvalue.uploadedreels)
+  //   {
+  //     setreelspreview(URL.createObjectURL(reelsvalue.uploadedreels))
+  //   }
+  //   if(memevalue.uploadedmeme)
+  //   {
+  //     setmemepreview(URL.createObjectURL(memevalue.uploadedmeme))
+  //   }
+  // },[imagevalue.uploadedimg,videovalue.uploadedvideo,reelsvalue.uploadedreels,memevalue.uploadedmeme])
 
   const submitimage=async(e)=>
   {
@@ -119,9 +143,7 @@ function Addimages({ images, videos, reels, memes }) {
             imgdescription:""
           })
           setpreview("")
-          setTimeout(() => {
-            navigate('/partybook/images')
-          }, 1000);
+          document.getElementById('fileInput').value = '';
           
         }
         else
@@ -165,6 +187,7 @@ function Addimages({ images, videos, reels, memes }) {
             videourl:""
           })
           setvideopreview("")
+          document.getElementById('fileInput').value = '';
         }
         else
         {
@@ -210,6 +233,7 @@ function Addimages({ images, videos, reels, memes }) {
             reelslink:""
           })
           setreelspreview("")
+          document.getElementById('fileInput').value = '';
         }
         else
         {
@@ -251,6 +275,7 @@ function Addimages({ images, videos, reels, memes }) {
             memename:""
           })
           setmemepreview("")
+          document.getElementById('fileInput').value = '';
         }
         else
         {
@@ -274,28 +299,28 @@ function Addimages({ images, videos, reels, memes }) {
         <div className='row row-cols-4 row-cols-md-4 justify-content-center align-items-center d-flex mb-2 w-100 mt-2'>
           <div className="col">
             <Link to={'/partybook2/images'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('images')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('images')}>
                 Images
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/videos'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('videos')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`}} onClick={() => handleButtonClick('videos')}>
                 Videos
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/reels'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('reels')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('reels')}>
                 Reels
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/memes'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('memes')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`}} onClick={() => handleButtonClick('memes')}>
                 Trolls
               </button>
             </Link>
@@ -304,54 +329,82 @@ function Addimages({ images, videos, reels, memes }) {
 
         {img&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
-           {preview?<img src={preview} width={'100px'} style={{ zIndex: '10' }} />: <label className="btn text-light " htmlFor="fileInput" style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }}>
-              Upload Image
-              <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setimagevalue({...imagevalue,uploadedimg:e.target.files[0]})}/>
-            </label>}
+          {preview ? (
+             <label className='btn text-light btn-success' htmlFor='fileInput'>
+                Image uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Image
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleimageChange} />
+                            </label>
+                        )}
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={imagevalue.imgname} onChange={(e)=>setimagevalue({...imagevalue,imgname:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' placeholder='Description' value={imagevalue.imgdescription} onChange={(e)=>setimagevalue({...imagevalue,imgdescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} type='button' onClick={(e)=>submitimage(e)}>Submit</button>
+          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}`}} type='button' onClick={(e)=>submitimage(e)}>Submit</button>
         </form>}
 
 
         {vd&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
-            <label className="btn text-light " htmlFor="fileInput" style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }}>
-              Upload Videos
-              <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setvideovalue({...videovalue,uploadedvideo:e.target.files[0]})} />
-            </label>
+          {videopreview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Video uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`}}>
+                                Upload Video
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlevideoChange} />
+                            </label>
+                        )}
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={videovalue.videoname} onChange={(e)=>setvideovalue({...videovalue,videoname:e.target.value})} />
           <input type="text" className='form-control mt-2' placeholder='Link' value={videovalue.videourl} onChange={(e)=>setvideovalue({...videovalue,videourl:e.target.value})}/>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={(e)=>submitvideo(e)}>Submit</button>
+          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}` }} onClick={(e)=>submitvideo(e)}>Submit</button>
         </form>}
 
 
         {rl&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
-            <label className="btn text-light " htmlFor="fileInput" style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }}>
-              Upload Reels
-              <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setreelsvalue({...reelsvalue,uploadedreels:e.target.files[0]})}/>
-            </label>
+          {reelspreview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Reels uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Reels
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlereelschange} />
+                            </label>
+                        )}
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={reelsvalue.reelsname} onChange={(e)=>setreelsvalue({...reelsvalue,reelsname:e.target.value})}/>
           <input type="text" className='form-control mt-2' placeholder='Link' value={reelsvalue.reelslink} onChange={(e)=>setreelsvalue({...reelsvalue,reelslink:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' value={reelsvalue.reelsdescription} placeholder='Description' onChange={(e)=>setreelsvalue({...reelsvalue,reelsdescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={(e)=>submitreels(e)}>Submit</button>
+          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}`}} onClick={(e)=>submitreels(e)}>Submit</button>
         </form>}
 
 
         {mem&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
-           {memepreview?<img src={memepreview} className='w-100' />: <label className="btn text-light " htmlFor="fileInput" style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }}>
-              Upload Trolls
-              <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setmemevalue({...memevalue,uploadedmeme:e.target.files[0]})} />
-            </label>}
+          {memepreview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Meme uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`}}>
+                                Upload Meme
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlememechange} />
+                            </label>
+                        )}
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={memevalue.memename} onChange={(e)=>setmemevalue({...memevalue,memename:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' placeholder='Description' value={memevalue.memedescription} onChange={(e)=>setmemevalue({...memevalue,memedescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={(e)=>submitmeme(e)}>Submit</button>
+          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}` }} onClick={(e)=>submitmeme(e)}>Submit</button>
         </form>}
 
 

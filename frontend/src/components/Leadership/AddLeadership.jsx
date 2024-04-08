@@ -22,16 +22,15 @@ function AddLeadership() {
       })
     const[allcategory,setallcategory]=useState([])
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
+    const bgcolor=localStorage.getItem("bgcolor")
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
   
-    useEffect(()=>
-    {
-      if(data.image)
-      {
-        setpreview(URL.createObjectURL(data.image))
-      }
-    },[data.image])
+    const handleFileChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setdata({ ...data, image: selectedImage });
+      setpreview(URL.createObjectURL(selectedImage));
+  };
   
     useEffect(()=>
     {
@@ -158,6 +157,18 @@ const handleleadership = async (e) => {
           const res = await axios.post(`${url}/api/admin/add-leadership`, formdata, { headers: headers });
           if (res.status === 200 || res.status === 201) {
               toast.success('Leadership added successfully');
+              setdata({
+                  name: "",
+                  address: "",
+                  image: "",
+                  position: "",
+                  phone: [],
+                  email: [],
+                  categoryselect: "",
+                  link: ""
+              })
+              setpreview('');
+              document.getElementById('fileInput').value = '';
           } else {
               toast.error('Something went wrong');
           }
@@ -180,13 +191,17 @@ const handleleadership = async (e) => {
         <form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
             <input type="text" className='form-control mt-3' placeholder='Name' name="name" value={data.name} onChange={handleChange} />
             <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
-            {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
-                Image uploaded
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
-                Upload Image
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
-                </label> }
+            {preview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Image uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Image
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
+                            </label>
+                        )}
             </div>
             <Form.Select aria-label="Default select example" className='mt-3' name="categoryselect" value={data.categoryselect} onChange={handleChange}>
                 <option>Select Category</option>
@@ -204,7 +219,7 @@ const handleleadership = async (e) => {
                 </div>
             ))}
             <div className='bg-light rounded'>
-                <button className='btn' type='button' onClick={() => handleAddPhone('phone')}><i className="fa-solid fa-plus" style={{ color: 'rgba(63, 0, 126, 1)' }}></i></button>
+                <button className='btn' type='button' onClick={() => handleAddPhone('phone')}><i className="fa-solid fa-plus" style={{ color: `${bgcolor}` }}></i></button>
             </div>
 
             {data.email.map((email, index) => (
@@ -214,12 +229,12 @@ const handleleadership = async (e) => {
                 </div>
             ))}
             <div className='bg-light rounded'>
-                <button className='btn' type='button' onClick={() => handleAddEmail('email')}><i className="fa-solid fa-plus" style={{ color: 'rgba(63, 0, 126, 1)' }}></i></button>
+                <button className='btn' type='button' onClick={() => handleAddEmail('email')}><i className="fa-solid fa-plus" style={{ color:`${bgcolor}` }}></i></button>
             </div>
 
             <input type="text" className='form-control mt-3' placeholder='Link' name="link" value={data.link} onChange={handleChange} />
 
-            <button className='btn mt-4 text-light ' style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} type='button' onClick={(e) => handleleadership(e)}>Submit</button>
+            <button className='btn mt-4 text-light ' style={{ backgroundColor: `${bgcolor}` }} type='button' onClick={(e) => handleleadership(e)}>Submit</button>
 
         </form>
 

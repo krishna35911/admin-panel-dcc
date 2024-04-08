@@ -10,7 +10,7 @@ function Displaynews() {
     const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
     const navigate=useNavigate()
     const[news,setnews]=useState([])
-  
+    const bgcolor=localStorage.getItem("bgcolor")
     useEffect(()=>
     {
       seturl(localStorage.getItem("volunteerurl"))
@@ -99,7 +99,7 @@ function Displaynews() {
      :<p>No data available</p>}
       </tbody>
     </Table>
-    <Link to={'/addnews'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2" type='button'></i>Add news</button></Link>
+    <Link to={'/addnews'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add news</button></Link>
    </div>
    <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
 

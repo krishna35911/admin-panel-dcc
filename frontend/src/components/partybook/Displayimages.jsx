@@ -16,6 +16,7 @@ function Displayimages({ images, videos, reels, memes }) {
   const[memevalue,setmemevalue]=useState([])
 
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const navigate=useNavigate()
 
   useEffect(()=>
@@ -202,28 +203,28 @@ function Displayimages({ images, videos, reels, memes }) {
       <div className='row row-cols-4 row-cols-md-4  justify-content-center align-items-center d-flex w-100 mt-2'>
           <div className="col">   
            <Link to={'/partybook/images'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('images')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('images')}>
                 Images
               </button>
             </Link>
           </div>
           <div className="col">   
           <Link to={'/partybook/videos'} >
-              <button className={`btn text-light rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('videos')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('videos')}>
                 Videos
               </button>
             </Link>
           </div>
           <div className="col">    
           <Link to={'/partybook/reels'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('reels')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('reels')}>
                 Reels
               </button>
             </Link>
           </div>
           <div className="col">    
           <Link to={'/partybook/memes'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor: 'rgba(63, 0, 126, 1)' }} onClick={() => handleButtonClick('memes')}>
+              <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('memes')}>
               Trolls
               </button>
             </Link>
@@ -243,7 +244,7 @@ function Displayimages({ images, videos, reels, memes }) {
       </ListGroup.Item>))
         :<p>No data available</p>}
           </ListGroup>
-          <Link to={'/partybook2/images'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new image</button></Link></>}
+          <Link to={'/partybook2/images'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new image</button></Link></>}
 
 
           {vd&& <><ListGroup as="ol" numbered className='mb-2 p-2 w-100' style={{}} >
@@ -258,7 +259,7 @@ function Displayimages({ images, videos, reels, memes }) {
         <button className='btn' type='button' onClick={(e) => removevideo(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}} ></i></button>
       </ListGroup.Item>))
         :<p>No data available</p>}
-          </ListGroup><Link to={'/partybook2/videos'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new Video</button></Link></>}
+          </ListGroup><Link to={'/partybook2/videos'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new Video</button></Link></>}
 
 
           {rl&& <><ListGroup as="ol" numbered className='mb-2 p-2 w-100' style={{}} >
@@ -274,7 +275,7 @@ function Displayimages({ images, videos, reels, memes }) {
      </ListGroup.Item>))
         :<p>No data available</p>}
           </ListGroup>
-          <Link to={'/partybook2/reels'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new reel</button></Link></>}
+          <Link to={'/partybook2/reels'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new reel</button></Link></>}
 
           {mem&& <><ListGroup as="ol" numbered className='mb-2 p-2 w-100' style={{}} >
         {memevalue?.length>0?
@@ -289,7 +290,7 @@ function Displayimages({ images, videos, reels, memes }) {
       </ListGroup.Item>))
        :<p>No data available</p>}   
           </ListGroup>
-          <Link to={'/partybook2/memes'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new meme</button></Link></>}
+          <Link to={'/partybook2/memes'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new meme</button></Link></>}
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

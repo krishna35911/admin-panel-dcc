@@ -20,6 +20,7 @@ function DispplayLeadership() {
   })
   const[allcategory,setallcategory]=useState([])
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const navigate=useNavigate()
   useEffect(()=>
   {
@@ -134,7 +135,7 @@ function DispplayLeadership() {
               <Col key={category} xs={4} md={3} className='me-auto'>
                 <button
                   className={`btn text-light rounded-5 ${activeCategory === category ? 'active' : ''}`}
-                  style={{ backgroundColor: 'rgba(63, 0, 126, 1)', width: '100%', marginBottom: '10px' }}
+                  style={{ backgroundColor: `${bgcolor}`, width: '100%', marginBottom: '10px' }}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
@@ -165,7 +166,7 @@ function DispplayLeadership() {
           <p>No candidates available.</p>
         )}
 
-      <Link to={'/leadership'}><button className='btn mt-2 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
+      <Link to={'/leadership'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

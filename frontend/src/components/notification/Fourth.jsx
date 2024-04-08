@@ -15,24 +15,24 @@ function Fourth() {
     title:""
   })
   const[url,seturl]=useState(localStorage.getItem("commonurl"))
+  const bgcolor=localStorage.getItem("bgcolor")
   const[allloksabha,setallloksabha]=useState({})
   const[allassembly,setallassembly]=useState({})
   const navigate=useNavigate()
 
   const[preview,setpreview]=useState("")
   
-  useEffect(()=>
-  {
-    if(data.image)
-    {
-      setpreview(URL.createObjectURL(data.image))
-    }
-  },[data.image])
+  const handleFileChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setdata({ ...data, image: selectedImage });
+    setpreview(URL.createObjectURL(selectedImage));
+};
   useEffect(()=>
   {
     seturl(localStorage.getItem("commonurl"))
   },[])
 
+  console.log(url);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -61,6 +61,8 @@ function Fourth() {
   const loksabha=async()=>
   {
     const districtname=localStorage.getItem("districtname")
+    console.log(districtname);
+    console.log(url)
     try {
       const res=await axios.get(`${url}/api/admin/districtV4?district=${districtname}`)
       if(res.status===200)
@@ -112,8 +114,10 @@ const handlesubmit=async(e)=>
     formdata.append("title",title);
 console.log(token);
     try {
+      
       const res=await axios.post(`${url}/api/admin/district-notification`,formdata,{
         headers:{
+          "Content-Type":"multipart/form-data",
           "x-access-token":token
         }
       })
@@ -127,6 +131,8 @@ console.log(token);
           image:null,
           title:""
         })
+        setpreview('');
+        document.getElementById('fileInput').value = '';
       }
       else
       {
@@ -155,28 +161,32 @@ useEffect(()=>
            </div>
            <h4 className='fw-bold mt-3 mb-3'>Notification</h4>
             <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
-            <select class="form-select" aria-label="Default select example" onChange={(e)=>{setdata({...data,loksabhaname:e.target.value})}} >
-              <option selected>Select Your loksabha</option>
+            <select class="form-select" aria-label="Default select example" value={data.loksabhaname} onChange={(e)=>{setdata({...data,loksabhaname:e.target.value})}} >
+              <option selected value="">Select Your loksabha</option>
               {allloksabha?.length>0?allloksabha.map((item)=>(<option value={item}>{item}</option>)):<option value="no data">no data</option>}
               </select>
 
-              {data.loksabhaname && <select class="form-select mt-3" aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
-              <option selected>Select Your assembly</option>
+              {data.loksabhaname && <select class="form-select mt-3" value={data.assemblyname} aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
+              <option selected value="">Select Your assembly</option>
               {allassembly?.length>0?allassembly.map((item)=>(<option value={item}>{item}</option>)):<option></option>}
               </select>}
 
-              <input type="text" className='form-control mt-3' placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}}/>
-              <input type="text" className='form-control mt-3' placeholder='URL' onChange={(e)=>{setdata({...data,notificationurl:e.target.value})}}/>
+              <input type="text" className='form-control mt-3' value={data.title} placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}}/>
+              <input type="text" className='form-control mt-3' value={data.notificationurl} placeholder='URL' onChange={(e)=>{setdata({...data,notificationurl:e.target.value})}}/>
               <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
-              {preview?<label className="btn text-light btn-success " htmlFor="fileInput">
-                Image uploaded
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 "/>
-                </label>:<label className="btn text-light " htmlFor="fileInput" style={{backgroundColor:'rgba(63, 0, 126, 1)'}}>
-                Upload Image
-                <input type="file" id="fileInput" style={{ display: 'none' }} className="form-control w-25 " onChange={(e)=>setdata({...data,image:e.target.files[0]})}/>
-                </label> }
+              {preview ? (
+                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                                Image uploaded
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
+                            </label>
+                        ) : (
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                                Upload Image
+                                <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
+                            </label>
+                        )}
             </div> 
-              <button className='btn mt-4 text-light' style={{backgroundColor:'rgba(63, 0, 126, 1)'}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+              <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
             </form>
       </div>
       <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
