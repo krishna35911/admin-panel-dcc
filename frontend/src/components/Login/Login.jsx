@@ -50,8 +50,8 @@ useEffect(() => {
   return (
     <div className='firstdiv'>
       <div style={{ position: 'absolute', color: 'white' }} className='secondiv' >
-        <h3 style={{ fontFamily: 'koho', fontWeight: '700', fontSize: '28px' }} className='heading'>Login</h3>
-        <p style={{ fontFamily: 'koho', fontWeight: '500', fontSize: '13px' }}>Welcome!! Enter your details</p>
+        <h3 style={{ fontFamily: 'koho', fontWeight: 'bold', fontSize: '28px'}} className='heading text-start ms-5'>Login</h3>
+        <p style={{ fontFamily: 'koho', fontWeight: '500', fontSize: '17px',textAlign:'center' }}>Welcome!! Enter your details</p>
         <form className='d-flex flex-column justify-content-center align-items-center ms-5 p-4 rounded' style={{ backgroundColor: 'rgba(0, 0, 0, 0.35)' }}>
           <input type="email" placeholder='Email' className='form-control rounded w-100' value={data.email} onChange={(e) => setdata({ ...data, email: e.target.value })} />
           <input type='password' placeholder='Password' className='form-control mt-5 rounded' value={data.password} onChange={(e) => setdata({ ...data, password: e.target.value })} />
