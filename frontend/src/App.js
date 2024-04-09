@@ -30,6 +30,12 @@ import Displaynews from './components/News/Displaynews';
 import Addarticle from './components/Articles/Addarticle';
 import Displayarticle from './components/Articles/Displayarticle';
 import Displayevent from './components/Calender/Displayevent';
+import Displayrep from './components/PeopleRep/Displayrep';
+import Addrep from './components/PeopleRep/Addrep';
+import History from './components/History/History';
+import DisplayHistory from './components/History/DisplayHistory';
+import Media from './components/socialmediaform/Media';
+import Displaymedia from './components/socialmediaform/Displaymedia';
 
 function App() {
   return (
@@ -37,7 +43,7 @@ function App() {
       <Routes>
         <Route path={'/'} element={<Login/>}></Route>
         <Route path={'/panel'} element={<Welcome/>}></Route>
-        <Route path={'/district'} element={<Third/>}></Route>
+        <Route path={'/district'} element={<Third insideDistrict/>}></Route>
         <Route path={'/notification'} element={<Fourth/>}></Route>
         <Route path={'/carousel'} element={<Fifth/>}></Route>
         <Route path={'/polling'} element={<Polling/>}></Route>
@@ -71,6 +77,12 @@ function App() {
         <Route path={'/addarticle'} element={<Addarticle/>}></Route>
         <Route path={'/displayarticle'} element={<Displayarticle/>}></Route>
         <Route path={'/displaycalender'} element={<Displayevent/>}></Route>
+        <Route path={'/displayrep'} element={<Displayrep/>}></Route>
+        <Route path={'/addrep'} element={<Addrep/>}></Route>
+        <Route path={'/history'} element={<History/>}></Route>
+        <Route path={'/displayHistory'} element={<DisplayHistory/>}></Route>
+        <Route path={'/addmedia'} element={<Media/>}></Route>
+        <Route path={'/displaymedia'} element={<Displaymedia/>}></Route>
 
       </Routes>
     </>

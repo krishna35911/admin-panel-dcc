@@ -3,7 +3,7 @@ import './Displayevent.css'
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
@@ -96,10 +96,10 @@ function Displayevent() {
     <div className='container'>
     <Homebutton/>
       <div className=' justify-content-center align-items-center d-flex flex-column '>
-      <div className='justify-content-center align-items-center d-flex ' style={{height: '100px',position: 'relative',width: '100%',overflow: 'hidden'}}>
-          <img src="https://i.postimg.cc/RF3SkJz8/wave.png" alt=""  style={{position: 'absolute',width: '157%',left: '-34px'}} className='parentdiv'/>
-          <img src="https://i.postimg.cc/3R3VsdDh/download-1-3-1.png" alt="" width={'100px'} style={{zIndex: '10'}} />
-           </div>
+      <div className='justify-content-center align-items-center d-flex' style={{ height: '100px', position: 'relative', width: '100%', overflow: 'hidden' }}>
+          <img src="https://i.postimg.cc/RF3SkJz8/wave.png" alt="" style={{ position: 'absolute', width:'130%',rotate:'-7deg',objectFit:'contain', objectPosition:'center',left: '-34px' }} className='parentdiv' />
+          <img src="https://i.postimg.cc/3R3VsdDh/download-1-3-1.png" alt="" width={'100px'} style={{ zIndex: '10' }} />
+      </div>
            <div className='d-flex justify-content-start '>
             <p className='fw-bold'>Update your calender</p>
            </div>
@@ -117,7 +117,10 @@ function Displayevent() {
                     }
                 />
                 </div>
-                <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={(e)=>handleclick(e)}>View Event</button>
+               <div className='d-flex'>
+                  <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={(e)=>handleclick(e)}>View Event</button>
+                 <Link to={'/calender'}> <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} >Add new event</button></Link>
+               </div>
 
                 <Collapse in={open}>
         <div id="example-collapse-text">

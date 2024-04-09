@@ -40,12 +40,12 @@ function Third() {
   return (
    
    <div className='container'>
-    <Sidebar/>
+   <Sidebar insideDistrict/>
       <div className="justify-content-center align-items-center d-flex flex-column">
-      <div className='justify-content-center align-items-center d-flex' style={{height: '100px',position: 'relative',width: '100%',overflow: 'hidden'}}>
-          <img src="https://i.postimg.cc/RF3SkJz8/wave.png" alt=""  style={{position: 'absolute',width: '157%',left: '-34px'}} className='parentdiv'/>
-          <img src="https://i.postimg.cc/3R3VsdDh/download-1-3-1.png" alt="" width={'100px'} style={{zIndex: '10'}} />
-           </div>
+      <div className='justify-content-center align-items-center d-flex' style={{ height: '100px', position: 'relative', width: '100%', overflow: 'hidden' }}>
+          <img src="https://i.postimg.cc/RF3SkJz8/wave.png" alt="" style={{ position: 'absolute', width:'130%',rotate:'-7deg',objectFit:'contain', objectPosition:'center',left: '-34px' }} className='parentdiv' />
+          <img src="https://i.postimg.cc/3R3VsdDh/download-1-3-1.png" alt="" width={'100px'} style={{ zIndex: '10' }} />
+      </div>
            <div className='d-flex justify-content-end flex-column content'>
           <p style={{fontSize: '20px', marginBottom: '0'}}>Welcome To Our E-Organizer Admin</p>  
            <p style={{ fontSize: '15px', marginTop: '0',fontWeight:'bold' }}>{subname}</p>         
@@ -54,23 +54,24 @@ function Third() {
              <Row>
              <Col xs={4} md={4} lg={4}>
               <Link to={'/notification'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
-                  <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
-                    <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Notification</p>
-                  </div>
+              <div className='box' style={{ backgroundColor: `${bgcolor}`, position: 'relative'}}>
+              <div className='box-content p-4'>
+                <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
                 </div>
+            <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold', textAlign: 'center' }}>Notification</p>
+          </div>
+        </div>
+
               </Link>
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/approval'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>                      
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Approval</p>
                   </div>
                 </div>
@@ -80,9 +81,9 @@ function Third() {
               <Link to={'/partybook/images'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Party Book</p>
                   </div>
                 </div>
@@ -91,12 +92,12 @@ function Third() {
           </Row>
           <Row className='mt-2'>
           <Col xs={4} md={4} lg={4}>
-              <Link to={''} style={{ textDecoration: 'none' }}>
+              <Link to={'/displayrep'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '12px', marginBottom: '0', fontWeight: 'bold' }}>People's Representatives</p>
                   </div>
                 </div>
@@ -106,9 +107,9 @@ function Third() {
               <Link to={'/socialmedia'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Social Media</p>
                   </div>
                 </div>
@@ -118,9 +119,9 @@ function Third() {
               <Link to={'/whatsapplinks'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Whatsapp Group</p>
                   </div>
                 </div>
@@ -132,9 +133,9 @@ function Third() {
               <Link to={'/displaypoll'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Polling</p>
                   </div>
                 </div>
@@ -144,9 +145,9 @@ function Third() {
               <Link to={'/displayassign'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Assignments</p>
                   </div>
                 </div>
@@ -156,9 +157,9 @@ function Third() {
               <Link to={''} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Reports</p>
                   </div>
                 </div>
@@ -170,9 +171,9 @@ function Third() {
               <Link to={'/displayslogan'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Slogans</p>
                   </div>
                 </div>
@@ -182,9 +183,9 @@ function Third() {
               <Link to={'/displaynews'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>News</p>
                   </div>
                 </div>
@@ -194,9 +195,9 @@ function Third() {
               <Link to={'/displayleadership'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Leadership</p>
                   </div>
                 </div>
@@ -208,9 +209,9 @@ function Third() {
               <Link to={'/displayarticle'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Articles</p>
                   </div>
                 </div>
@@ -220,9 +221,9 @@ function Third() {
               <Link to={'/displaycalender'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Calender</p>
                   </div>
                 </div>
@@ -232,9 +233,9 @@ function Third() {
               <Link to={'/displayad'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>ADs</p>
                   </div>
                 </div>
@@ -246,22 +247,34 @@ function Third() {
               <Link to={'/carousel'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Carousel</p>
                   </div>
                 </div>
               </Link>
             </Col>
             <Col xs={4} md={4} lg={4}>
-              <Link to={'/'} style={{ textDecoration: 'none' }}>
+              <Link to={'/displayHistory'} style={{ textDecoration: 'none' }}>
                 <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
                   <div className='box-content p-4'>
-                    <div style={{ position: 'absolute', top: '0', right: '0' }} className='me-3'>
-                      <i className="fa-solid fa-square-arrow-up-right"></i>
-                    </div>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
                     <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>History</p>
+                  </div>
+                </div>
+              </Link>
+            </Col>
+            <Col xs={4} md={4} lg={4}>
+              <Link to={'/displaymedia'} style={{ textDecoration: 'none' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                  <div className='box-content p-3 ms-2'>
+                  <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                </div>
+                    <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>District social media</p>
                   </div>
                 </div>
               </Link>
