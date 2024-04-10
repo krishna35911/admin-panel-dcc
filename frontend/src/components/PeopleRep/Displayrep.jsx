@@ -112,12 +112,14 @@ const handledelete=async(representativeId )=>
     const res=await axios.delete(`${url}/api/admin/representatives/${categoryId}/${representativeId}`,{headers:{"x-access-token":token}})
     if(res.status===200 || res.status===201)
     {
-      toast.success('Poll deleted successfully')
-      handleclick()
+      toast.success('Deleted successfully')
+      setrep(prevCandidates =>
+        prevCandidates.filter(c => c._id !== representativeId)
+      );
     }
     else
     {
-      toast.error('Failed to delete poll')
+      toast.error('Failed to delete')
       console.log(res.response.data);
     }
 }

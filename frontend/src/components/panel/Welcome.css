@@ -5,6 +5,7 @@
 {
     height: auto;
     width: 100%;
+    overflow: hidden;
 }
 .parentdiv{
     transform: rotate(10deg);

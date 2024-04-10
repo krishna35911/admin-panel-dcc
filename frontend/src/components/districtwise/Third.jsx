@@ -50,7 +50,7 @@ function Third() {
           <p style={{fontSize: '20px', marginBottom: '0'}}>Welcome To Our E-Organizer Admin</p>  
            <p style={{ fontSize: '15px', marginTop: '0',fontWeight:'bold' }}>{subname}</p>         
         </div>
-           <div className='d-flex justify-content-center align-item-center flex-column rowdiv'>
+           <div className='d-flex justify-content-center align-item-center flex-column '>
              <Row>
              <Col xs={4} md={4} lg={4}>
               <Link to={'/notification'} style={{ textDecoration: 'none' }}>

@@ -5,6 +5,7 @@
 {
     height: auto;
     width: 100%;
+    overflow: hidden;
 }
 .parentdiv{
     transform: rotate(10deg);
@@ -32,12 +33,12 @@
     .rowdiv
     {
         width:100%;
-        margin-left: 100px;
+        /* margin-left: 100px; */
     }
     .content
     {
         width: 100%;
-        margin-left: 10%;
+        /* margin-left: 10%; */
     }
     
 }
@@ -50,12 +51,12 @@
     .rowdiv
     {
         width:100%;
-        margin-left: 100px;
+        /* margin-left: 100px; */
     }
     .content
     {
         width: 100%;
-        margin-left: 10%;
+        /* margin-left: 10%; */
     }
 }
 @media only screen and (max-width: 600px) and (min-width: 400px){
@@ -67,7 +68,7 @@
     .rowdiv
     {
         width:100%;
-        margin-left: 50px;
+        /* margin-left: 50px; */
     }
 }
 .box {

@@ -77,7 +77,7 @@ function Welcome() {
            <p style={{ fontSize: '25px', marginTop: '0',marginBottom: '0',fontWeight:'bold' }}>Jovin C Varghese</p>  
            <p style={{ fontSize: '15px', marginTop: '0' }}>Let’s Assign Task Across kerala</p>                
         </div>
-        <div className='d-flex justify-content-center align-item-center flex-column rowdiv'>
+        <div className='d-flex justify-content-center align-item-center flex-column'>
              <Row>
              <Col xs={4} md={4} onClick={(e)=>district(e,'Thrissur','Sadhbhavana','rgba(63, 0, 126, 1)')}>
               
