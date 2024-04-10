@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Fourth.css'
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
@@ -18,6 +17,8 @@ function Fourth() {
   const bgcolor=localStorage.getItem("bgcolor")
   const[allloksabha,setallloksabha]=useState({})
   const[allassembly,setallassembly]=useState({})
+  const [open, setOpen] = useState(false);
+  const[notify,setnotify]=useState([])
   const navigate=useNavigate()
 
   const[preview,setpreview]=useState("")
@@ -151,6 +152,7 @@ useEffect(()=>
     assembly()
   }
 },[data.loksabhaname])
+
   return (
    <div className='container'>
     <Homebutton/>
@@ -161,15 +163,15 @@ useEffect(()=>
       </div>
            <h4 className='fw-bold mt-3 mb-3'>Notification</h4>
             <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
-            <select class="form-select" aria-label="Default select example" value={data.loksabhaname} onChange={(e)=>{setdata({...data,loksabhaname:e.target.value})}} >
-              <option selected value="">Select Your loksabha</option>
+            <select class="form-select" aria-label="Default select example" value={data.loksabhaname} onChange={(e)=>{setdata({...data,loksabhaname:e.target.value})}}  >
+            <option selected value="">Select all loksabha</option>
               {allloksabha?.length>0?allloksabha.map((item)=>(<option value={item}>{item}</option>)):<option value="no data">no data</option>}
               </select>
 
-              {data.loksabhaname && <select class="form-select mt-3" value={data.assemblyname} aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
-              <option selected value="">Select Your assembly</option>
+            <select class="form-select mt-3" value={data.assemblyname} aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
+              <option selected value="">Select all assembly</option>
               {allassembly?.length>0?allassembly.map((item)=>(<option value={item}>{item}</option>)):<option></option>}
-              </select>}
+              </select>
 
               <input type="text" className='form-control mt-3' value={data.title} placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}}/>
               <input type="text" className='form-control mt-3' value={data.notificationurl} placeholder='URL' onChange={(e)=>{setdata({...data,notificationurl:e.target.value})}}/>
@@ -186,7 +188,15 @@ useEffect(()=>
                             </label>
                         )}
             </div> 
-              <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+              <div className='d-flex'>
+                <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+               <Link to={'/displaynotification'}>
+                  <button className='btn  text-light mt-4'  type='button' style={{backgroundColor:`${bgcolor}`}}>
+                      View notifications
+                    </button>
+               </Link>
+              </div>
+              
             </form>
       </div>
       <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

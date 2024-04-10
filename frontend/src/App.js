@@ -36,6 +36,8 @@ import History from './components/History/History';
 import DisplayHistory from './components/History/DisplayHistory';
 import Media from './components/socialmediaform/Media';
 import Displaymedia from './components/socialmediaform/Displaymedia';
+import Viewnotifications from './components/notification/Viewnotifications';
+import Districtnoti from './components/notification/Districtnoti';
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
         <Route path={'/panel'} element={<Welcome/>}></Route>
         <Route path={'/district'} element={<Third insideDistrict/>}></Route>
         <Route path={'/notification'} element={<Fourth/>}></Route>
+        <Route path={'/districtnotification'} element={<Districtnoti/>}></Route>
+        <Route path={'/displaynotification'} element={<Viewnotifications/>}></Route>
         <Route path={'/carousel'} element={<Fifth/>}></Route>
         <Route path={'/polling'} element={<Polling/>}></Route>
         <Route path={'/displaypoll'} element={<Displaypoll/>}></Route>

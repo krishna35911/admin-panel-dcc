@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Welcome.css'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Sidebar from '../Sidebar';
@@ -246,15 +246,17 @@ function Welcome() {
             </div>
           </Col>
           <Col xs={4} md={4} >
-            <div className='box' style={{ backgroundColor: 'rgba(16, 0, 113, 1)', position: 'relative' }}>
-              <div className='box-content'>
-              <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
-                  <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+            <Link to='/districtnotification' style={{ textDecoration: 'none' }}>
+              <div className='box' style={{ backgroundColor: 'rgba(16, 0, 113, 1)', position: 'relative' }}>
+                <div className='box-content'>
+                <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
+                    <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
+                  </div>
+                <p style={{ fontSize: '13px', marginBottom: '0' ,fontWeight:'bold'}}>All District </p>
+                <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>notification</p>
                 </div>
-              <p style={{ fontSize: '13px', marginBottom: '0' ,fontWeight:'bold'}}>To Do </p>
-              <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>List</p>
               </div>
-            </div>
+            </Link>
           </Col>
           </Row>
         </div>
