@@ -22,6 +22,14 @@ function Sidebar({ name,insideDistrict, ...props}) {
         localStorage.removeItem("subname")
         navigate('/')
     }
+    const handlearrow=()=>
+    {
+      localStorage.removeItem("commonurl")
+      localStorage.removeItem("token")
+      localStorage.removeItem("districtname")
+      localStorage.removeItem("bgcolor")
+      localStorage.removeItem("subname")
+    }
   return (
     <div className='d-flex align-items-center justify-content-between '>
         <button className='btn'  onClick={handleShow} type='button'><i class="fa-solid fa-bars-staggered mt-3 ms-3 bg-dark text-light p-2" style={{borderRadius:'30px'}}></i></button>
@@ -37,7 +45,7 @@ function Sidebar({ name,insideDistrict, ...props}) {
          </div>
         </Offcanvas.Body>
       </Offcanvas>
-     {insideDistrict&& <div className='mt-3 me-3 p-2 '>
+     {insideDistrict&& <div className='mt-3 me-3 p-2 ' onClick={handlearrow}>
      <Link to={'/panel'} style={{textDecoration:'none'}}> <i class="fa-solid fa-circle-arrow-left fs-3 text-black"></i></Link>
       </div>}
     </div>

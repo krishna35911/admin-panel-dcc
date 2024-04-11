@@ -38,8 +38,10 @@ import Media from './components/socialmediaform/Media';
 import Displaymedia from './components/socialmediaform/Displaymedia';
 import Viewnotifications from './components/notification/Viewnotifications';
 import Districtnoti from './components/notification/Districtnoti';
+import Getvolunteers from './components/approval/Getvolunteers';
 
 function App() {
+ 
   return (
     <>
       <Routes>
@@ -61,6 +63,7 @@ function App() {
         <Route path={'/whatsapp'} element={<Addgroups/>}></Route>
         <Route path={'/whatsapplinks'} element={<Newgrp/>}></Route>
         <Route path={'/approval'} element={<Displaymembers/>}></Route>
+        {/* <Route path={'/approved'} element={<Getvolunteers/>}></Route> */}
         <Route path={'/socialmedia'} element={<Displaycandidates />}></Route>
         <Route path={'/partybook/images'} element={<Displayimages images/>}></Route>
         <Route path={'/partybook/videos'} element={<Displayimages videos/>}></Route>

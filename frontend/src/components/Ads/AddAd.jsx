@@ -5,12 +5,14 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function AddAd() {
     const[data,setdata]=useState({
         image:"",
         href:"",
         name:""
     })
+    const textcolor=getColorForDistrict()
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
 
@@ -89,6 +91,7 @@ function AddAd() {
             }
         }
     }
+    
   return (
     <div className='container'>
       <Homebutton/>
@@ -102,19 +105,19 @@ function AddAd() {
         <input type="text" className='form-control mt-3' placeholder='Name' onChange={(e)=>{setdata({...data,name:e.target.value})}}/>
         <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
         {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn  btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor:`${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor:`${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
                         )}
       </div> 
       <input type="text" className='form-control mt-3' placeholder='URL' onChange={(e)=>{setdata({...data,href:e.target.value})}}/>
-            <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+            <button className='btn mt-4' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
 
       </form>
   

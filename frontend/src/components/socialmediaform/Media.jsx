@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
-
+import { getColorForDistrict } from '../Districtcolor';
 function Media() {
     const [data,setdata]=useState({
         facebook:"",
@@ -17,7 +17,7 @@ function Media() {
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const navigate=useNavigate()
     const bgcolor=localStorage.getItem("bgcolor")
-  
+    const textcolor=getColorForDistrict()
     useEffect(()=>
     {
       seturl(localStorage.getItem("commonurl"))
@@ -92,7 +92,7 @@ function Media() {
       <input type="text" className='form-control mt-3' placeholder='Youtube' value={data.youtube} onChange={(e)=>{setdata({...data,youtube:e.target.value})}} />
       <input type="text" className='form-control mt-3' placeholder='Whatsapp' value={data.whatsapp} onChange={(e)=>{setdata({...data,whatsapp:e.target.value})}} />
       <input type="text" className='form-control mt-3' placeholder='Contact' value={data.contact} onChange={(e)=>{setdata({...data,contact:e.target.value})}} />
-      <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+      <button className='btn mt-4  ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
                        
       </form>
   

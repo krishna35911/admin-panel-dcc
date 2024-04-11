@@ -6,11 +6,13 @@ import { ListGroup } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton'
+import { getColorForDistrict } from '../Districtcolor';
 function Displayassign() {
     const[assign,setassign]=useState([])
     const navigate=useNavigate()
       const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
       const bgcolor=localStorage.getItem("bgcolor")
+      const textcolor=getColorForDistrict()
 
       useEffect(()=>
       {
@@ -73,6 +75,7 @@ function Displayassign() {
       {
         handleassign()
       },[])
+      
   return (
     <div className='container'>
     <Homebutton/>
@@ -95,7 +98,7 @@ function Displayassign() {
       </ListGroup.Item>)):<p>Nothing</p>}
        
       </ListGroup>
-         <Link to={'/addassign'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Assignment</button></Link>
+         <Link to={'/addassign'}> <button className='btn mt-2 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Assignment</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

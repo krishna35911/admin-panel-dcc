@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Homebutton from '../Homebutton';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getColorForDistrict } from '../Districtcolor';
 function Polling() {
   const[poll,setpoll]=useState(
     {title:"",
@@ -15,8 +16,7 @@ function Polling() {
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
-
-
+const textcolor=getColorForDistrict()
   useEffect(()=>
   {
     seturl(localStorage.getItem("commonurl"))
@@ -120,8 +120,8 @@ function Polling() {
                 </div>))}
 
                  <div className='d-flex'>
-                    <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={addoption}><i class="fa-solid fa-plus me-2"></i>Add Option</button>
-                    <button className='btn mt-4 text-light ms-5' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={handlepoll}>Submit</button>
+                    <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={addoption}><i class="fa-solid fa-plus me-2"></i>Add Option</button>
+                    <button className='btn mt-4 ms-5' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={handlepoll} >Submit</button>
                  </div>
                 </form>
           </div>

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function Addslogan() {
     const [data,setdata]=useState({
         slogan:"",
@@ -15,6 +16,7 @@ function Addslogan() {
     })
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
+    const textcolor=getColorForDistrict()
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
   
@@ -109,12 +111,12 @@ function Addslogan() {
               <textarea name="" id="" cols="30" rows="5"  className='form-control mt-3' placeholder='Slogan' onChange={(e)=>{setdata({...data,slogan:e.target.value})}}></textarea>
               <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
               {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -123,7 +125,7 @@ function Addslogan() {
             <input type="text" placeholder='Title' className='form-control mt-3' onChange={(e)=>{setdata({...data,title:e.target.value})}} />
             <input type="text" placeholder='Author' className='form-control mt-3' onChange={(e)=>{setdata({...data,author:e.target.value})}} />
             <input type="text" placeholder='Event' className='form-control mt-3' onChange={(e)=>{setdata({...data,event:e.target.value})}} />
-                  <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+                  <button className='btn mt-4  ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
                              
             </form>
         

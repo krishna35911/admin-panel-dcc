@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
 import { ListGroup } from 'react-bootstrap'
 import Collapse from 'react-bootstrap/Collapse';
+import { getColorForDistrict } from '../Districtcolor';
 
 function Displayevent() {
     const [date, setDate] = useState(new Date());
@@ -19,7 +20,7 @@ function Displayevent() {
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
-
+  const textcolor=getColorForDistrict()
   useEffect(()=>
   {
     seturl(localStorage.getItem("commonurl"))
@@ -92,6 +93,7 @@ function Displayevent() {
         handlesubmit(e)
         setOpen(!open)
     }
+    
   return (
     <div className='container'>
     <Homebutton/>
@@ -118,8 +120,8 @@ function Displayevent() {
                 />
                 </div>
                <div className='d-flex'>
-                  <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={(e)=>handleclick(e)}>View Event</button>
-                 <Link to={'/calender'}> <button className='btn mt-3 text-light' style={{backgroundColor:`${bgcolor}`}} >Add new event</button></Link>
+                  <button className='btn mt-3 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} onClick={(e)=>handleclick(e)}>View Event</button>
+                 <Link to={'/calender'}> <button className='btn mt-3' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} >Add new event</button></Link>
                </div>
 
                 <Collapse in={open}>

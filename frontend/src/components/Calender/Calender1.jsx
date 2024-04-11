@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 
 function Calender1() {
     const [date, setDate] = useState(new Date());
@@ -21,6 +22,8 @@ function Calender1() {
   const navigate=useNavigate()
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
+  const textcolor=getColorForDistrict()
+
 
   useEffect(()=>
   {
@@ -93,6 +96,8 @@ function Calender1() {
                  { 
                   console.log(error); 
                 } } }
+
+                
   return (
    <div className='container'>
     <Homebutton/>
@@ -122,12 +127,12 @@ function Calender1() {
 
                 <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'rgba(227, 227, 227, 1)'}}>
                 {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn  btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -135,7 +140,7 @@ function Calender1() {
               </div>
 
                   <textarea cols="10" rows="4" placeholder='Description' className='form-control mt-3' style={{backgroundColor:'rgba(227, 227, 227, 1)'}} value={data.description} onChange={(e)=>setdata({...data,description:e.target.value})}></textarea>
-                  <button className='btn w-50 text-light mt-3' style={{backgroundColor:`${bgcolor}`}}onClick={(e)=>handlesubmit(e)}>Create Event</button>
+                  <button className='btn w-50  mt-3' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}onClick={(e)=>handlesubmit(e)}>Create Event</button>
           </div>
           <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
 

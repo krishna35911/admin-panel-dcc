@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Table from 'react-bootstrap/Table';
 import Collapse from 'react-bootstrap/Collapse';
 import Modal from 'react-bootstrap/Modal';
+import { getColorForDistrict } from '../Districtcolor';
 function Addrep() {
   const[data,setdata]=useState({
     name:"",
@@ -22,6 +23,7 @@ function Addrep() {
 const[categoryselect,setcategoryselect]=useState([])
 const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
+    const textcolor=getColorForDistrict()
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
     const [show, setShow] = useState(false);
@@ -228,12 +230,12 @@ const handleButtonClick = () => {
           <input type="text" className='form-control mt-3' placeholder='Name' name="name" value={data.name} onChange={handleChange} />
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
           {preview ? (
-                          <label className='btn text-light btn-success' htmlFor='fileInput'>
+                          <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                               Image uploaded
                               <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                           </label>
                       ) : (
-                          <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                          <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` ,color:`${textcolor}`}}>
                               Upload Image
                               <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                           </label>
@@ -268,8 +270,8 @@ const handleButtonClick = () => {
               :<p>Nothing</p>}
             </Form.Select>
             <div className='d-flex'>
-              <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={handleShow} type='button'><i class="fa-solid fa-plus me-2" ></i>Add new category</button>
-              <button className='btn mt-4 ms-5 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlerep(e)}>Submit</button>
+              <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} onClick={handleShow} type='button'><i class="fa-solid fa-plus me-2" ></i>Add new category</button>
+              <button className='btn mt-4 ms-5' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlerep(e)}>Submit</button>
             </div>
 
       </form>
@@ -280,7 +282,7 @@ const handleButtonClick = () => {
             <Modal.Body>
               <form className='d-flex'>
                 <input type="text" className='form-control' placeholder='Enter category name' value={category.categoryname} onChange={(e)=>setcategory({...category,categoryname:e.target.value})}/>
-                <button className='btn text-light'  onClick={(e)=>handlesubmit(e)} type='button' style={{backgroundColor:`${bgcolor}`}}>
+                <button className='btn'  onClick={(e)=>handlesubmit(e)} type='button' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}>
                 Submit
               </button>
               </form>

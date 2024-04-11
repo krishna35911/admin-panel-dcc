@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
-
+import { getColorForDistrict } from '../Districtcolor';
 function Addnews() {
     const [data,setdata]=useState({
         title:"",
@@ -19,7 +19,7 @@ function Addnews() {
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
     const bgcolor=localStorage.getItem("bgcolor")
-  
+    const textcolor=getColorForDistrict()
     useEffect(()=>
     {
       seturl(localStorage.getItem("volunteerurl"))
@@ -106,12 +106,12 @@ function Addnews() {
         <textarea name="" id="" cols="30" rows="5"  className='form-control mt-3' placeholder='News' value={data.news} onChange={(e)=>{setdata({...data,news:e.target.value})}}></textarea>
         <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
         {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn  btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor:`${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor:`${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -121,7 +121,7 @@ function Addnews() {
       <input type="date" className='form-control mt-3' placeholder='Date' value={data.date} onChange={(e)=>{setdata({...data,date:e.target.value})}} />
       <input type="text" className='form-control mt-3' placeholder='Link' value={data.link} onChange={(e)=>{setdata({...data,link:e.target.value})}} />
       <input type="text" className='form-control mt-3' placeholder='Optional' value={data.optional} onChange={(e)=>{setdata({...data,optional:e.target.value})}} />
-            <button className='btn mt-4 text-light ' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+            <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
                        
       </form>
   

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 
 function Addimages({ images, videos, reels, memes }) {
   const [activeButton, setActiveButton] = useState('images');
@@ -35,6 +36,7 @@ function Addimages({ images, videos, reels, memes }) {
   }) 
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
+  const textcolor=getColorForDistrict()
   const navigate=useNavigate()
 
   useEffect(()=>
@@ -298,28 +300,28 @@ const handlememechange = (e) => {
         <div className='row row-cols-4 row-cols-md-4 justify-content-center align-items-center d-flex mb-2 w-100 mt-2'>
           <div className="col">
             <Link to={'/partybook2/images'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('images')}>
+              <button className={`btn rounded-5 ${activeButton === 'images' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }} onClick={() => handleButtonClick('images')}>
                 Images
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/videos'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`}} onClick={() => handleButtonClick('videos')}>
+              <button className={`btn rounded-5 ${activeButton === 'videos' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`,color:`${textcolor}`}} onClick={() => handleButtonClick('videos')}>
                 Videos
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/reels'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}` }} onClick={() => handleButtonClick('reels')}>
+              <button className={`btn rounded-5 ${activeButton === 'reels' ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }} onClick={() => handleButtonClick('reels')}>
                 Reels
               </button>
             </Link>
           </div>
           <div className="col">
             <Link to={'/partybook2/memes'}>
-              <button className={`btn text-light rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`}} onClick={() => handleButtonClick('memes')}>
+              <button className={`btn rounded-5 ${activeButton === 'memes' ? 'active' : ''}`} style={{ backgroundColor:`${bgcolor}`,color:`${textcolor}`}} onClick={() => handleButtonClick('memes')}>
                 Trolls
               </button>
             </Link>
@@ -329,12 +331,12 @@ const handlememechange = (e) => {
         {img&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
           {preview ? (
-             <label className='btn text-light btn-success' htmlFor='fileInput'>
+             <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleimageChange} />
                             </label>
@@ -342,19 +344,19 @@ const handlememechange = (e) => {
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={imagevalue.imgname} onChange={(e)=>setimagevalue({...imagevalue,imgname:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' placeholder='Description' value={imagevalue.imgdescription} onChange={(e)=>setimagevalue({...imagevalue,imgdescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}`}} type='button' onClick={(e)=>submitimage(e)}>Submit</button>
+          <button className='btn mt-4 ' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>submitimage(e)}>Submit</button>
         </form>}
 
 
         {vd&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
           {videopreview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Video uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`}}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}`}}>
                                 Upload Video
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlevideoChange} />
                             </label>
@@ -362,19 +364,19 @@ const handlememechange = (e) => {
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={videovalue.videoname} onChange={(e)=>setvideovalue({...videovalue,videoname:e.target.value})} />
           <input type="text" className='form-control mt-2' placeholder='Link' value={videovalue.videourl} onChange={(e)=>setvideovalue({...videovalue,videourl:e.target.value})}/>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}` }} onClick={(e)=>submitvideo(e)}>Submit</button>
+          <button className='btn mt-4' style={{ backgroundColor: `${bgcolor}` ,color:`${textcolor}`}} onClick={(e)=>submitvideo(e)}>Submit</button>
         </form>}
 
 
         {rl&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
           {reelspreview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Reels uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Reels
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlereelschange} />
                             </label>
@@ -383,19 +385,19 @@ const handlememechange = (e) => {
           <input type="text" className='form-control mt-2' placeholder='Name' value={reelsvalue.reelsname} onChange={(e)=>setreelsvalue({...reelsvalue,reelsname:e.target.value})}/>
           <input type="text" className='form-control mt-2' placeholder='Link' value={reelsvalue.reelslink} onChange={(e)=>setreelsvalue({...reelsvalue,reelslink:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' value={reelsvalue.reelsdescription} placeholder='Description' onChange={(e)=>setreelsvalue({...reelsvalue,reelsdescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}`}} onClick={(e)=>submitreels(e)}>Submit</button>
+          <button className='btn mt-4 ' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}`}} onClick={(e)=>submitreels(e)}>Submit</button>
         </form>}
 
 
         {mem&&<form style={{ backgroundColor: 'rgba(227, 227, 227, 1)' }} className='mb-5 p-3 w-100 justify-content-center align-items-center d-flex flex-column rounded'>
           <div className=' mt-3 w-100 p-5 rounded text-center' style={{ backgroundColor: 'white' }}>
           {memepreview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' htmlFor='fileInput' style={{color:`${textcolor}`}}>
                                 Meme uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`}}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}`}}>
                                 Upload Meme
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handlememechange} />
                             </label>
@@ -403,7 +405,7 @@ const handlememechange = (e) => {
           </div>
           <input type="text" className='form-control mt-2' placeholder='Name' value={memevalue.memename} onChange={(e)=>setmemevalue({...memevalue,memename:e.target.value})}/>
           <textarea name="" id="" cols="30" rows="7" className='form-control mt-2' placeholder='Description' value={memevalue.memedescription} onChange={(e)=>setmemevalue({...memevalue,memedescription:e.target.value})}></textarea>
-          <button className='btn mt-4 text-light' style={{ backgroundColor: `${bgcolor}` }} onClick={(e)=>submitmeme(e)}>Submit</button>
+          <button className='btn mt-4' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }} onClick={(e)=>submitmeme(e)}>Submit</button>
         </form>}
 
 

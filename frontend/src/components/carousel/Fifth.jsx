@@ -7,6 +7,7 @@ import { Table } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function Fifth() {
   const [carousel,setcarousel]=useState({
     image:"",
@@ -19,6 +20,7 @@ function Fifth() {
   const bgcolor=localStorage.getItem("bgcolor")
   const [open, setOpen] = useState(false);
   const[allcarousel,setallcarousel]=useState([])
+  const textcolor=getColorForDistrict()
   useEffect(()=>
   {
     seturl(localStorage.getItem("commonurl"))
@@ -123,6 +125,7 @@ function Fifth() {
     setOpen(!open);
     handlecarousel()
   };
+  
   return (
    <div className='container'>
     <Homebutton/>
@@ -135,12 +138,12 @@ function Fifth() {
             <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
             <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
             {img ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` ,color:`${textcolor}`}}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -149,9 +152,9 @@ function Fifth() {
               <input type="text" className='form-control mt-3' placeholder='URL' value={carousel.href} onChange={(e)=>setcarousel({...carousel,href:e.target.value})}/>
               <input type="text" className='form-control mt-3' placeholder='Name' value={carousel.name} onChange={(e)=>setcarousel({...carousel,name:e.target.value})}/>
               <div className='d-flex'>
-                <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='buttom' onClick={(e)=>handlesubmit(e)}>Submit</button>
-                <button className='btn  text-light mt-4'  type='button' onClick={handleButtonClick}
-                aria-controls="example-collapse-text"  style={{backgroundColor:`${bgcolor}`}}
+                <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='buttom' onClick={(e)=>handlesubmit(e)}>Submit</button>
+                <button className='btn mt-4'  type='button' onClick={handleButtonClick}
+                aria-controls="example-collapse-text"  style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}
                 aria-expanded={open}>
                   View all carousels
                 </button>

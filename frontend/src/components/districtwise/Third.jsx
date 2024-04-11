@@ -37,6 +37,18 @@ function Third() {
   {
     seturl(localStorage.getItem("commonurl"))
   },[])
+
+  const getColorForDistrict = () => {
+    const district=localStorage.getItem("districtname")
+    const districtsWithBlackText = ['Palakkad', 'Kannur','Idukki','Pathanamthitta','Ernakulam','Malappuram'];
+
+    if (districtsWithBlackText.includes(district)) {
+      return 'black';
+    }
+
+    return 'white'; 
+  };
+
   return (
    
    <div className='container'>
@@ -54,7 +66,7 @@ function Third() {
              <Row>
              <Col xs={4} md={4} lg={4}>
               <Link to={'/notification'} style={{ textDecoration: 'none' }}>
-              <div className='box' style={{ backgroundColor: `${bgcolor}`, position: 'relative'}}>
+              <div className='box' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict()}}>
               <div className='box-content p-4'>
                 <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -67,19 +79,19 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/approval'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
                 </div>
-                    <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>Approval</p>
+                    <p style={{ fontSize: '13px', marginBottom: '0', fontWeight: 'bold' }}>TaskForce</p>
                   </div>
                 </div>
               </Link>
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/partybook/images'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -93,7 +105,7 @@ function Third() {
           <Row className='mt-2'>
           <Col xs={4} md={4} lg={4}>
               <Link to={'/displayrep'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -105,7 +117,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/socialmedia'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -117,7 +129,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/whatsapplinks'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -131,7 +143,7 @@ function Third() {
           <Row className='mt-2'>
           <Col xs={4} md={4} lg={4}>
               <Link to={'/displaypoll'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -143,7 +155,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displayassign'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -155,7 +167,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={''} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -169,7 +181,7 @@ function Third() {
           <Row className='mt-2'>
           <Col xs={4} md={4} lg={4}>
               <Link to={'/displayslogan'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' ,color:getColorForDistrict()}}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -181,7 +193,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displaynews'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -193,7 +205,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displayleadership'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -207,7 +219,7 @@ function Third() {
           <Row className='mt-3'>
           <Col xs={4} md={4} lg={4}>
               <Link to={'/displayarticle'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -219,7 +231,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displaycalender'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -231,7 +243,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displayad'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -245,7 +257,7 @@ function Third() {
           <Row className='mt-3'>
           <Col xs={4} md={4} lg={4}>
               <Link to={'/carousel'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -257,7 +269,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displayHistory'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-4'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
@@ -269,7 +281,7 @@ function Third() {
             </Col>
             <Col xs={4} md={4} lg={4}>
               <Link to={'/displaymedia'} style={{ textDecoration: 'none' }}>
-                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative' }}>
+                <div className='box ' style={{ backgroundColor: `${bgcolor}`, position: 'relative',color:getColorForDistrict() }}>
                   <div className='box-content p-3 ms-2'>
                   <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>

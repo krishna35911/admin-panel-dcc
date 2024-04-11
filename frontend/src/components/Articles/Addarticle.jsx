@@ -5,6 +5,7 @@ import './Addarticle.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getColorForDistrict } from '../Districtcolor';
 function Addarticle() {
     const [data, setData] = useState({
         image: null,
@@ -17,6 +18,7 @@ function Addarticle() {
     const bgcolor=localStorage.getItem("bgcolor")
     const navigate=useNavigate()
     const[preview,setpreview]=useState("")
+    const textcolor=getColorForDistrict()
     useEffect(()=>
     {
       seturl(localStorage.getItem("commonurl"))
@@ -101,12 +103,12 @@ function Addarticle() {
                     />
                     <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
                         {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` ,color:`${textcolor}`}}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -130,8 +132,8 @@ function Addarticle() {
                         onChange={(e) => setData({ ...data, description: e.target.value })}
                     ></textarea>
                     <button
-                        className='btn mt-4 text-light'
-                        style={{ backgroundColor: `${bgcolor}` }}
+                        className='btn mt-4 '
+                        style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}
                         type='button'
                         onClick={handleSubmit}
                     >

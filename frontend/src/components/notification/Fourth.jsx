@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function Fourth() {
   const[data,setdata]=useState({
     loksabhaname:'',
@@ -14,6 +15,8 @@ function Fourth() {
     title:""
   })
   const[url,seturl]=useState(localStorage.getItem("commonurl"))
+  
+const textcolor=getColorForDistrict()
   const bgcolor=localStorage.getItem("bgcolor")
   const[allloksabha,setallloksabha]=useState({})
   const[allassembly,setallassembly]=useState({})
@@ -170,28 +173,28 @@ useEffect(()=>
 
             <select class="form-select mt-3" value={data.assemblyname} aria-label="Default select example" onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}}>
               <option selected value="">Select all assembly</option>
-              {allassembly?.length>0?allassembly.map((item)=>(<option value={item}>{item}</option>)):<option></option>}
+              {data.loksabhaname &&allassembly?.length>0?allassembly.map((item)=>(<option value={item}>{item}</option>)):<option></option>}
               </select>
 
               <input type="text" className='form-control mt-3' value={data.title} placeholder='Title' onChange={(e)=>{setdata({...data,title:e.target.value})}}/>
               <input type="text" className='form-control mt-3' value={data.notificationurl} placeholder='URL' onChange={(e)=>{setdata({...data,notificationurl:e.target.value})}}/>
               <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
               {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
                         )}
             </div> 
               <div className='d-flex'>
-                <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+                <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
                <Link to={'/displaynotification'}>
-                  <button className='btn  text-light mt-4'  type='button' style={{backgroundColor:`${bgcolor}`}}>
+                  <button className='btn mt-4'  type='button' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}>
                       View notifications
                     </button>
                </Link>

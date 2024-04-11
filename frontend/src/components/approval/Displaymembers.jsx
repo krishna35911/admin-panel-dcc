@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react'
 import  './Displaymembers.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Collapse from 'react-bootstrap/Collapse';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
 import { ListGroup } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { getColorForDistrict } from '../Districtcolor';
 
 function Displaymembers() {
     const[assembly,setassembly]=useState([])
     const [open, setOpen] = useState(false);
     const[searchdetails,setsearchdetails]=useState([])
+    const [showButtons, setShowButtons] = useState(false)
+    const[approveddetails,setapproveddetails]=useState([])
+    const [activeButton, setActiveButton] = useState('request'); 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -30,6 +33,7 @@ function Displaymembers() {
     const navigate=useNavigate()
     const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
     const bgcolor=localStorage.getItem("bgcolor")
+    const textcolor=getColorForDistrict()
     useEffect(()=>
     {
       seturl(localStorage.getItem("volunteerurl"))
@@ -131,6 +135,8 @@ function Displaymembers() {
         if(res.status===200 || res.status===201)
         {
           setsearchdetails(res.data.data);
+          setShowButtons(true);
+          // navigate('/approved', { state: { searchdetails: res.data.data } });
           setdata({
             assemblyname: "",
             mandalamname: "",
@@ -147,8 +153,57 @@ function Displaymembers() {
         toast.error('Failed to fetch volunteer data');
       }
     };
+    console.log(searchdetails);
 
-   
+    const handleapproved=async()=>
+    {
+      const token = localStorage.getItem('volunteertoken');
+      const districtname = localStorage.getItem('districtname');
+      const { assemblyname, mandalamname, boothname, taskforce } = data;
+      let query = '';
+      if (districtname) {
+        query += `district=${districtname}`;
+      }
+      if (assemblyname) {
+        query += `&constituency=${assemblyname}`;
+      }
+      if (mandalamname) {
+        query += `&assembly=${mandalamname}`;
+      }
+      if (boothname) {
+        query += `&booth=${boothname}`;
+      }
+      if (taskforce) {
+        query += `&power=${taskforce}`;
+      }
+      try {
+        const res = await axios.get(`${url}/api/admin/volunteers?page=1&perPage=10&${query}`, {
+          headers: { 'x-access-token': token },
+        });
+        if(res.status===200 || res.status===201)
+        {
+          setapproveddetails(res.data.data);
+          setShowButtons(true);
+          // navigate('/approved', { state: { approveddetails: res.data.data } });
+          setdata({
+            assemblyname: "",
+            mandalamname: "",
+            boothname: "",
+            taskforce: "",
+          })
+        }
+        else
+        {
+          console.log(res.response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching volunteer data:', error);
+        toast.error('Failed to fetch volunteer data');
+      }
+    };
+    console.log(approveddetails);
+
+
  useEffect(()=>
  {
   handleassembly()
@@ -173,6 +228,7 @@ useEffect(()=>
 const handleButtonClick = () => {
   setOpen(!open);
   handleclick()
+  handleapproved()
 };
   
 const getdetails=async(e,id)=>
@@ -224,11 +280,32 @@ const decline=async(e,id)=>
         {
           toast.error('Failed to delete')
         }
-    }
+     }
+
+     const deleteapproved=async(e,id)=>
+     {
+       const token=localStorage.getItem("volunteertoken")
+       e.preventDefault()
+         const res=await axios.delete(`${url}/api/admin/delete-volunteer/${id}`,{headers:{"x-access-token":token}})
+         if(res.status===200)
+         {
+           toast.success('Deleted successfully')
+           handleClose()
+         }
+         else
+         {
+           toast.error('Failed to delete')
+         }
+        }
 const handledetails = (e,id) => {
   handleShow()
   getdetails(e,id)
 };
+const handlebuttonClick = (buttonType) => {
+  setActiveButton(buttonType);
+};
+
+
   return (
     <div className='container'>
     <Homebutton/>
@@ -237,6 +314,80 @@ const handledetails = (e,id) => {
           <img src="https://i.postimg.cc/RF3SkJz8/wave.png" alt="" style={{ position: 'absolute', width:'130%',rotate:'-7deg',objectFit:'contain', objectPosition:'center',left: '-34px' }} className='parentdiv' />
           <img src="https://i.postimg.cc/3R3VsdDh/download-1-3-1.png" alt="" width={'100px'} style={{ zIndex: '10' }} />
       </div>
+      {showButtons === true ? 
+      (
+        <>
+        <div className='mb-2 mt-3 justify-content-between d-flex'>
+        <div>
+          <button
+            className={`btn rounded-5 ${activeButton === 'request' ? 'active' : ''}`}
+            style={{ backgroundColor: `${bgcolor}`, marginBottom: '10px',color:`${textcolor}` }}
+            onClick={() => handlebuttonClick('request')}
+          >
+            Request
+          </button>
+          <button
+            className={`btn rounded-5 ms-5 ${activeButton === 'approved' ? 'active' : ''}`}
+            style={{ backgroundColor: `${bgcolor}`, marginBottom: '10px' ,color:`${textcolor}`}}
+            onClick={() => handlebuttonClick('approved')}
+          >
+            Approved
+          </button>
+        </div>
+      </div>
+      <ListGroup className='w-100'>
+        {(activeButton === 'request' && searchdetails.length > 0) ||
+        (activeButton === 'approved' && approveddetails.length > 0) ? (
+          (activeButton === 'request' ? searchdetails : approveddetails).map((item, index) => (
+            <ListGroup.Item
+              key={index}
+              style={{ backgroundColor: 'rgba(227, 227, 227, 1)', borderBottom: '2px solid rgb(133, 129, 129, 0.553)' }}
+              as='li'
+            >
+              <div className='d-flex justify-content-start gap-5 align-items-center w-100'>
+                <p>{index + 1}</p>
+                <div>
+                  <button className='btn fw-bold' type='button' onClick={(e) => handledetails(e, item._id)}>
+                    {item.name}
+                  </button>
+                </div>
+              </div>
+            </ListGroup.Item>
+          ))
+        ) : (
+          <p>No volunteer details found</p>
+        )}
+      </ListGroup>
+          <Modal show={show} onHide={handleClose} centered>
+          <Modal.Header closeButton style={{border:'none'}}>
+          </Modal.Header>
+          <Modal.Body>
+          <div className="details-container">
+              <p><strong>Name:</strong> {alldetails.name}</p>
+              <p><strong>Mobile:</strong> {alldetails.phone}</p>
+              <p><strong>Email:</strong> {alldetails.email}</p>
+              <p><strong>District:</strong> {alldetails.district}</p>
+              <p><strong>Loksabha:</strong> {alldetails.loksabha}</p>
+              <p><strong>Assembly:</strong> {alldetails.constituency}</p>
+              <p><strong>Mandalam:</strong> {alldetails.assembly}</p>
+              <p><strong>Booth:</strong> {alldetails.booth}</p>
+          </div>
+          </Modal.Body>
+         { activeButton==='request' ? <Modal.Footer style={{border:'none'}}>
+            <Button variant="success" onClick={(e)=>accept(e,alldetails._id)}>
+              Accept
+            </Button>
+            <Button variant="danger" onClick={(e)=>decline(e,alldetails._id)}>
+              Decline
+            </Button>
+          </Modal.Footer>:<Modal.Footer style={{border:'none'}}>
+            <Button variant="danger" onClick={(e)=>deleteapproved(e,alldetails._id)}>
+              Delete
+            </Button>
+          </Modal.Footer>}
+        </Modal>
+      </>
+      )  :
       <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
       <select class="form-select" aria-label="Default select example" value={data.assemblyname} onChange={(e)=>{setdata({...data,assemblyname:e.target.value})}} >
         <option selected value="">Select assembly</option>
@@ -257,9 +408,17 @@ const handledetails = (e,id) => {
         <option value="MTF">MTF</option>
         <option value="BTF">BTF</option>
       </select>}
-      <button type='button' className='btn text-light mt-4 w-50' onClick={handleButtonClick} style={{backgroundColor:`${bgcolor}`}}>Search</button>
+      <button
+        type='button'
+        className='btn mt-4 w-50'
+        onClick={handleButtonClick}
+        style={{ backgroundColor: `${bgcolor}` ,color:`${textcolor}`}}
+      >
+        Search
+      </button>
       </form>
-      <Collapse in={open} className='w-100'>
+      }
+      {/* <Collapse in={open} className='w-100'>
         <div id="example-collapse-text">
         <ListGroup className='w-100' >
           {searchdetails?.length>0?
@@ -272,14 +431,16 @@ const handledetails = (e,id) => {
                 <button className="btn fw-bold " type='button'  onClick={(e)=>handledetails(e,item._id)}>{item.name}</button>
               </div>
             </div>
-        </ListGroup.Item>)):<p>Nothing</p>}
+        </ListGroup.Item>
+        )):<p>Nothing</p>
+        }
         </ListGroup>
         </div>
         
-      </Collapse>
+      </Collapse> */}
      
     </div>
-    <Modal show={show} onHide={handleClose} centered>
+    {/* <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton style={{border:'none'}}>
         </Modal.Header>
         <Modal.Body>
@@ -302,7 +463,7 @@ const handledetails = (e,id) => {
             Decline
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
 
    </div>

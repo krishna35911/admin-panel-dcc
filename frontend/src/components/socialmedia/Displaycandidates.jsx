@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
-
+import { getColorForDistrict } from '../Districtcolor';
 function Displaycandidates() {
   const [activeButton, setActiveButton] = useState('');
   const[social,setsocial]=useState("")
@@ -31,6 +31,7 @@ function Displaycandidates() {
   const[allcategory,setallcategory]=useState([])
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
+  const textcolor=getColorForDistrict()
   const navigate=useNavigate()
   useEffect(()=>
   {
@@ -209,8 +210,8 @@ function Displaycandidates() {
       {allcategory?.length > 0 && allcategory.map((item, index) => (
         <div key={index} >
           <button
-            className={`btn text-light rounded-5  ${activeButton === item ? 'active' : ''}`}
-            style={{ backgroundColor: `${bgcolor}`, marginBottom: '10px' }}
+            className={`btn rounded-5  ${activeButton === item ? 'active' : ''}`}
+            style={{ backgroundColor: `${bgcolor}`, marginBottom: '10px',color:`${textcolor}` }}
             onClick={() => getcategory(item)}
           >
             {item}
@@ -275,7 +276,7 @@ function Displaycandidates() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Link to={'/socialmedia2'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
+      <Link to={'/socialmedia2'}><button className='btn mt-2' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New member</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

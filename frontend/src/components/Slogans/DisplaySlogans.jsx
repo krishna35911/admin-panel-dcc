@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function DisplaySlogans() {
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
+    const textcolor=getColorForDistrict()
     const navigate=useNavigate()
     const[slogan,setslogan]=useState([])
   
@@ -97,7 +99,7 @@ function DisplaySlogans() {
          :<p>No data available</p>}
           </tbody>
         </Table>
-        <Link to={'/slogan'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new slogan</button></Link>
+        <Link to={'/slogan'}><button className='btn mt-2 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2" type='button'></i>Add new slogan</button></Link>
        </div>
        <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
 

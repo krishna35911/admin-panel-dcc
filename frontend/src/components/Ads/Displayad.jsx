@@ -6,8 +6,10 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton'
+import { getColorForDistrict } from '../Districtcolor';
 function Displayad() {
   const[ad,setad]=useState([])
+  const textcolor=getColorForDistrict()
   const navigate=useNavigate()
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
     const bgcolor=localStorage.getItem("bgcolor")
@@ -73,6 +75,7 @@ function Displayad() {
     {
       handlead()
     },[])
+    
   return (
     <div className='container'>
       <Homebutton/>
@@ -94,7 +97,7 @@ function Displayad() {
         <button className='btn' type='button' onClick={(e) => removead(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
       </ListGroup.Item>)):<p>Nothing</p>}
       </ListGroup>
-     <Link to={'/ad'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Ads</button></Link>
+     <Link to={'/ad'}> <button className='btn mt-2 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Ads</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

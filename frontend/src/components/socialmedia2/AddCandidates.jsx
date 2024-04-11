@@ -10,6 +10,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function AddCandidates() {
   const [show, setShow] = useState(false);
 
@@ -34,6 +35,7 @@ function AddCandidates() {
 
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
+  const textcolor=getColorForDistrict()
   const navigate=useNavigate()
 
   const handleFileChange = (e) => {
@@ -202,12 +204,12 @@ useEffect(()=>
           <form style={{backgroundColor:'rgba(227, 227, 227, 1)'}} className='mb-5 p-3 w-100  justify-content-center align-items-center d-flex flex-column rounded'>
             <div className=' mt-3 w-100 p-5 rounded text-center' style={{backgroundColor:'white'}}>
             {preview ? (
-                            <label className='btn text-light btn-success' htmlFor='fileInput'>
+                            <label className='btn  btn-success' style={{color:`${textcolor}`}} htmlFor='fileInput'>
                                 Image uploaded
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn ' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}` }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
@@ -228,8 +230,8 @@ useEffect(()=>
             <input type="text" className='form-control mt-2' placeholder='Youtube' onChange={(e)=>setsocial({...social, youtube:e.target.value})} value={social.youtube}/>
             </div>
             <div className='d-flex'>
-              <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} onClick={handleShow} type='button'><i class="fa-solid fa-plus me-2" ></i>Add new category</button>
-              <button className='btn mt-4 ms-5 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handledetails(e)}>Submit</button>
+              <button className='btn mt-4 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} onClick={handleShow} type='button'><i class="fa-solid fa-plus me-2" ></i>Add new category</button>
+              <button className='btn mt-4 ms-5' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handledetails(e)}>Submit</button>
             </div>
           </form>
           <Modal show={show} onHide={handleClose} centered>
@@ -239,7 +241,7 @@ useEffect(()=>
             <Modal.Body>
               <form className='d-flex'>
                 <input type="text" className='form-control' placeholder='Enter category name' value={category.categoryname} onChange={(e)=>setcategory({...category,categoryname:e.target.value})}/>
-                <button className='btn text-light'  onClick={(e)=>handlesubmit(e)} type='button' style={{backgroundColor:`${bgcolor}`}}>
+                <button className='btn'  onClick={(e)=>handlesubmit(e)} type='button' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}>
                 Submit
               </button>
               </form>

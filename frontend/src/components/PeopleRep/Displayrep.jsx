@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Displayrep.css'
-
+import { getColorForDistrict } from '../Districtcolor';
 function Displayrep() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [rep, setrep] = useState([]);
@@ -15,6 +15,7 @@ function Displayrep() {
   const[allcategory,setallcategory]=useState([])
   const [url,seturl]=useState(localStorage.getItem("commonurl"))
   const bgcolor=localStorage.getItem("bgcolor")
+  const textcolor=getColorForDistrict()
   const navigate=useNavigate()
   useEffect(()=>
   {
@@ -147,7 +148,7 @@ useEffect(()=>
           {allcategory?.length > 0 ? (
             allcategory.map((item,index) => (
               <div key={index} className="">
-                <button className={`btn text-light rounded-5 mb-2 ${selectedCategory === item.category ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}`, whiteSpace: 'nowrap' }} onClick={()=>handleclick(item.category)}>
+                <button className={`btn rounded-5 mb-2 ${selectedCategory === item.category ? 'active' : ''}`} style={{ backgroundColor: `${bgcolor}`, color:`${textcolor}`,whiteSpace: 'nowrap' }} onClick={()=>handleclick(item.category)}>
                   {item.category}
                 </button>
               </div>
@@ -176,7 +177,7 @@ useEffect(()=>
 ) : (
   <p>No candidates available.</p>
 )}
-      <Link to={'/addrep'}><button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New representative</button></Link>
+      <Link to={'/addrep'}><button className='btn mt-2 ' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New representative</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

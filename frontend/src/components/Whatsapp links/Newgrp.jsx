@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
 function Newgrp() {
   const[whatsapp,setwhatsapp]=useState([])
   const navigate=useNavigate()
@@ -13,6 +14,10 @@ function Newgrp() {
   const [selectedDetails, setSelectedDetails] = useState(null);
     const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
     const bgcolor=localStorage.getItem("bgcolor")
+    
+const textcolor=getColorForDistrict()
+
+
     useEffect(()=>
     {
       seturl(localStorage.getItem("volunteerurl"))
@@ -94,7 +99,8 @@ function Newgrp() {
       <div className='row row-cols-4 row-cols-md-4  justify-content-center align-items-center d-flex w-100'>
         {whatsapp?.length>0?
         whatsapp.map((item)=>( <div className="col" key={item._id}>   
-        <button className={`btn text-light rounded-5 ${selectedPower === item.power ? 'selected' : ''}`} style={{backgroundColor:`${bgcolor}`}} onClick={() => handlePowerClick(item.power, item.details)}>{item.power}</button>
+        <button className={`btn rounded-5 ${selectedPower === item.power ? 'selected' : ''}`} style={{backgroundColor:`${bgcolor}`
+,color:`${textcolor}`}} onClick={() => handlePowerClick(item.power, item.details)}>{item.power}</button>
        </div>))
          :<p>Nothing</p>}
       </div>
@@ -121,7 +127,8 @@ function Newgrp() {
             <p>No items found</p>
           )}
         </ListGroup>
-         <Link to={'/whatsapp'}> <button className='btn mt-2 text-light' style={{backgroundColor:`${bgcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Group</button></Link>
+         <Link to={'/whatsapp'}> <button className='btn mt-2 ' style={{backgroundColor:`${bgcolor}`
+,color:`${textcolor}`}}><i class="fa-solid fa-plus me-2"></i>Add New Group</button></Link>
   
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>

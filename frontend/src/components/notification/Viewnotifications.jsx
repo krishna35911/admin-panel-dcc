@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function Viewnotifications() {
     const[notify,setnotify]=useState([])
     const [url,seturl]=useState(localStorage.getItem("commonurl"))
-    const bgcolor=localStorage.getItem("bgcolor")
     const navigate=useNavigate()
   
     useEffect(()=>

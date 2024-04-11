@@ -5,6 +5,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homebutton from '../Homebutton';
+import { getColorForDistrict } from '../Districtcolor';
+
 function Addgroups() {
   const[data,setdata]=useState({
     power:"",
@@ -13,6 +15,7 @@ function Addgroups() {
 })
 const [url,seturl]=useState(localStorage.getItem("volunteerurl"))
 const bgcolor=localStorage.getItem("bgcolor")
+const textcolor=getColorForDistrict()
 const navigate=useNavigate()
 useEffect(()=>
 {
@@ -88,7 +91,7 @@ const handlesubmit=async(e)=>
             <input type="text" className='form-control mt-2' placeholder='Name' value={data.power} onChange={(e)=>{setdata({...data,power:e.target.value})}}/>
             <input type="text" className='form-control mt-2' placeholder='Optional' value={data.optional} onChange={(e)=>{setdata({...data,optional:e.target.value})}}/>
             <input type="text" className='form-control mt-2' placeholder='URL' value={data.link} onChange={(e)=>{setdata({...data,link:e.target.value})}}/>
-            <button className='btn mt-4 text-light' style={{backgroundColor:`${bgcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
+            <button className='btn mt-4' style={{backgroundColor:`${bgcolor}`,color:`${textcolor}`}} type='button' onClick={(e)=>handlesubmit(e)}>Submit</button>
           </form>
     </div>
     <ToastContainer autoclose={2000} theme='colored' position='top-center'/>
