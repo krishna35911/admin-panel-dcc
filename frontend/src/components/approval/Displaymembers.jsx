@@ -177,7 +177,7 @@ function Displaymembers() {
         query += `&power=${taskforce}`;
       }
       try {
-        const res = await axios.get(`${url}/api/admin/volunteers?page=1&perPage=10&${query}`, {
+        const res = await axios.get(`${url}/api/admin/volunteers?${query}`, {
           headers: { 'x-access-token': token },
         });
         if(res.status===200 || res.status===201)

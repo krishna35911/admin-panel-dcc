@@ -16,20 +16,20 @@ function Districtnoti() {
       const bgcolor=localStorage.getItem("bgcolor")
       const[alldata,setalldata]=useState({})
       const alldistrict=[{
-        districtname:"Thrissur"},
-        {districtname:"Thiruvananthapuram"},
-        {districtname:"Wayanad"},
-        {districtname:"Alappuzha"},
+        districtname:"Thiruvananthapuram"},
+        {districtname:"Kollam"},
         {districtname:"Pathanamthitta"},
+        {districtname:"Alappuzha"},
+        {districtname:"Kottayam"},
         {districtname:"Idukki"},
         {districtname:"Ernakulam"},
+        {districtname:"Thrissur"},
         {districtname:"Palakkad"},
-        {districtname:"Kollam"},
-        {districtname:"Kasargod"},
-        {districtname:"Kottayam"},
-        {districtname:"Kannur"},
+        {districtname:"Malappuram"},
         {districtname:"Kozhikkode"},
-       { districtname:"Malappuuram"}
+        {districtname:"Wayanad"},
+        {districtname:"Kannur"},
+       { districtname:"Kasargod"}
       ]
       const navigate=useNavigate()
     
@@ -188,7 +188,7 @@ function Districtnoti() {
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' />
                             </label>
                         ) : (
-                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: `${bgcolor}` }}>
+                            <label className='btn text-light' htmlFor='fileInput' style={{ backgroundColor: 'rgba(16, 0, 113, 1)' }}>
                                 Upload Image
                                 <input type='file' id='fileInput' style={{ display: 'none' }} className='form-control w-25' onChange={handleFileChange} />
                             </label>
