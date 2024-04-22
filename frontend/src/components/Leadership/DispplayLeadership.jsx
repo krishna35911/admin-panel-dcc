@@ -135,7 +135,7 @@ function DispplayLeadership() {
       <div className='mb-2 mt-3'>
       <Row className='justify-content-center align-items-center d-flex w-100'>
             {[...new Set(candidates.map(candidate => candidate.category))].map(category => (
-              <Col key={category} xs={4} md={3} className='me-auto'>
+              <Col key={category} xs={3} md={3} sm={3} className='me-auto'>
                 <button
                   className={`btn rounded-5 ${activeCategory === category ? 'active' : ''}`}
                   style={{ backgroundColor: `${bgcolor}`,color:`${textcolor}`, width: '100%', marginBottom: '10px' }}

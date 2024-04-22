@@ -275,6 +275,7 @@ const decline=async(e,id)=>
         {
           toast.success('Deleted successfully')
           handleClose()
+          setsearchdetails(prevDetails => prevDetails.filter(item => item._id !== id));
         }
         else
         {
@@ -291,6 +292,7 @@ const decline=async(e,id)=>
          {
            toast.success('Deleted successfully')
            handleClose()
+           setapproveddetails(prevDetails => prevDetails.filter(item => item._id !== id));
          }
          else
          {

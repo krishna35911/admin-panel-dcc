@@ -92,24 +92,24 @@ function Welcome() {
                   </div>
                 </div>
           </Col>
-          <Col xs={4} md={4} onClick={(e)=>district(e,'Kozhikkode','Mahatma','rgba(5, 162, 255, 1)')}>
+          <Col xs={4} md={4} onClick={(e)=>district(e,'Kozhikode','Mahatma','rgba(5, 162, 255, 1)')}>
             <div className='box' style={{ backgroundColor: 'rgba(5, 162, 255, 1)', position: 'relative' }}>
               <div className='box-content'>
               <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
                 </div>
-              <p style={{ fontSize: '13px', marginBottom: '0',fontWeight:'bold' }}>Kozhikkode</p>
+              <p style={{ fontSize: '13px', marginBottom: '0',fontWeight:'bold' }}>Kozhikode</p>
               <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>Mahatma</p>
               </div>
             </div>
           </Col>
-          <Col xs={4} md={4} onClick={(e)=>district(e,'Kasaragode','Saravarsh','rgba(145, 0, 233, 1)')}>
+          <Col xs={4} md={4} onClick={(e)=>district(e,'Kasargod','Saravarsh','rgba(145, 0, 233, 1)')}>
             <div className='box' style={{ backgroundColor: 'rgba(145, 0, 233, 1)' , position: 'relative'}}>
               <div className='box-content '>
               <div style={{ position: 'absolute', top: '0', right: '0', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className='me-3 mt-2'>
                   <i className="fa-solid fa-arrow-up" style={{ transform: 'rotate(50deg)', color: 'white',fontSize:'12px' }}></i>
                 </div>
-              <p style={{ fontSize: '13px', marginBottom: '0' ,fontWeight:'bold'}}>Kasaragode</p>
+              <p style={{ fontSize: '13px', marginBottom: '0' ,fontWeight:'bold'}}>Kasaragod</p>
               <p style={{ fontSize: '11px', marginTop: '0', opacity: '0.8' }}>Saravarsh</p>
               </div>
             </div>

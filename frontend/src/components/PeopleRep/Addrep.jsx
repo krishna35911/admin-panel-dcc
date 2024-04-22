@@ -215,6 +215,20 @@ const handleButtonClick = () => {
   setOpen(!open);
 };
 
+const deletecategory=async(category)=>
+{
+  const token=localStorage.getItem("token")
+  const res=await axios.post(`${url}/api/admin/delete-category-representative`,{category},{headers:{"x-access-token":token}})
+  if(res.status===200)
+  {
+    toast.success("Deleted successfully")
+    categoryget()
+  }
+  else
+  {
+    toast.error("Failed to delete")
+  }
+}
 
   console.log(data);
   return (
@@ -301,6 +315,7 @@ const handleButtonClick = () => {
         <tr>
           <th>#</th>
           <th>Category name</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody className='text-center'>
@@ -308,6 +323,7 @@ const handleButtonClick = () => {
        categoryselect.map((item,index)=>(  <tr>
         <td>{index+1}</td>
         <td>{item.category}</td>
+        <td><button className='btn text-danger' onClick={()=>deletecategory(item.category)}><i class="fa-solid fa-trash"></i></button></td>
       </tr>))
      :<p>No data available</p>}
       </tbody>

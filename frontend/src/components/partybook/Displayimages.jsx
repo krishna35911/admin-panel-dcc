@@ -87,6 +87,7 @@ function Displayimages({ images, videos, reels, memes }) {
         const res=await axios.get(`${url}/api/admin/videogallery`,{headers:{"x-access-token":token}})
         if(res.status===200)
         {
+          console.log(res.data);
             setvideovalue(res.data)
         }
         else
@@ -240,6 +241,9 @@ function Displayimages({ images, videos, reels, memes }) {
       >
         <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.name}</div>
+          <div>
+            <img src={item.image} width={'100px'} height={'80px'} alt="" />
+          </div>
         </div>
         <i class="fa-solid fa-trash"  onClick={(e) => removeimage(e,item._id)} style={{color:'rgba(106, 106, 106, 1)'}} ></i>
       </ListGroup.Item>))
@@ -256,6 +260,9 @@ function Displayimages({ images, videos, reels, memes }) {
       >
         <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.title}</div>
+          <div>
+            <img src={item.video} width={'100px'} height={'80px'} alt="" />
+          </div>
         </div>
         <button className='btn' type='button' onClick={(e) => removevideo(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}} ></i></button>
       </ListGroup.Item>))
@@ -271,6 +278,9 @@ function Displayimages({ images, videos, reels, memes }) {
      >
        <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
          <div className="fw-bold">{item.name}</div>
+         <div>
+            <img src={item.image} width={'100px'} height={'80px'} alt="" />
+          </div>
        </div>
        <button className='btn' type='button' onClick={(e) => removereels(e,item._id)}><i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
      </ListGroup.Item>))
@@ -286,6 +296,9 @@ function Displayimages({ images, videos, reels, memes }) {
       >
         <div className="ms-2 me-auto" style={{overflow:'hidden'}}>
           <div className="fw-bold">{item.name}</div>
+          <div>
+            <img src={item.image} width={'100px'} height={'80px'} alt="" />
+          </div>
         </div>
        <button className='btn' type='button' onClick={(e)=>removememes(e,item._id)}> <i class="fa-solid fa-trash" style={{color:'rgba(106, 106, 106, 1)'}}></i></button>
       </ListGroup.Item>))

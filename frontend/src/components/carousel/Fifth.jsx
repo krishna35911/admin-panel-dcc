@@ -56,12 +56,7 @@ function Fifth() {
   {
     e.preventDefault()
     const {image,href,name}=carousel
-    if(!image || !href || !name)
-    {
-      alert("Please fill the form completely")
-    }
-    else
-    {
+   
       const token=localStorage.getItem("token")
       const formdata=new FormData()
       formdata.append("image",image)
@@ -90,7 +85,7 @@ function Fifth() {
       } catch (error) {
         console.log(error);
       }
-    }
+    
   }
   const handlecarousel=async()=>
   {
@@ -98,6 +93,7 @@ function Fifth() {
       const res=await axios.get(`${url}/api/admin/carousel`,{headers:{"x-access-token":token}})
       if(res.status===200)
       {
+        console.log(res.data);
          setallcarousel(res.data);
       }
       else
